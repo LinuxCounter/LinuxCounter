@@ -1,0 +1,58 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    {% if error %}
+        <div class="credential_error">{{ error.messageKey|trans(error.messageData, 'security') }} If you think this is a mistake, please first try to use the password reset form by clicking the &quot;Forgotten password&quot; button below the login form (or by clicking <a href="{{ url("fos_user_resetting_request") }}">here</a>). If this did not help, <a href="{{ url('syw_front_main_main_contact') }}">contact us through the contact form</a>.<br/>
+        <br/>
+        If you have a very old account and no longer access to the registered email address, please use <a href="{{ url('syw_front_main_main_contact') }}">the contact form</a> for requesting the change of the email address (instead of creating a new account!). Please remember to provide as many information as possible so that I can find your old account (Email addresses, counter number, etc...)</div>
+    {% endif %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'Login to your Linux Counter Account'|trans }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" action="{{ url("fos_user_security_check") }}" method="post">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+                            <div class="form-group">
+                                <label for="username" class="col-sm-2 control-label">{{ 'Username or Email'|trans }}</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control"type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="{{ 'Username or Email'|trans }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-2 control-label">{{ 'Password'|trans }}</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="password" id="password" name="_password" required="required" placeholder="{{ 'Password'|trans }}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="remember_me" name="_remember_me" value="on"/> {{ 'Remember me'|trans }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="col-sm-2">
+                                        <button type="submit" class="btn btn-default">{{ 'security.login.submit'|trans }}</button>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <a href="{{ url("fos_user_resetting_request") }}" class="btn btn-default">{{ 'Forgotten Password? Create a new password here!'|trans }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock fos_user_content %}

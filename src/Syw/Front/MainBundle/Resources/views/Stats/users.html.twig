@@ -1,0 +1,160 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_main_stats_users" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ 'Users per City'|trans }}</h3>
+                        </div>
+                        <div id="users_per_city" class="panel-body">
+                            <span>{{ 'The ability to set the city where you are living, is a new feature in this new website and thus, the numbers will be dramatically small. It is up to YOU, to set the city in your profile in order to get more accurate statistics.'|trans }}<br/><br/></span>
+                            {% if paginationAAA.getTotalItemCount > 0 %}
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationAAA, 'Name', 'b.name', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationAAA, 'Country', 'b.isoCountryCode', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationAAA, 'Region', 'b.region', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationAAA, 'Population', 'b.population', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationAAA, 'No. of Users', 'b.usernum', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for row in paginationAAA %}
+                                    <tr>
+                                        <td>
+                                            <div class="col-sm-11">
+                                                <a href="{{ url('syw_front_main_stats_cities', {'id': row.id}) }}">{{ row.name }}</a>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <a href="http://www.openstreetmap.org/#map=15/{{ row.getLatitude() }}/{{ row.getLongitude() }}"><img class="img-responsive" src="{{ '/bundles/sywfrontmain/images/map.png' }}" alt="View on map..."/></a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{ row.isoCountryCode }}
+                                        </td>
+                                        <td>
+                                            {{ row.region }}
+                                        </td>
+                                        <td>
+                                            {{ row.population|number_format }}
+                                        </td>
+                                        <td>
+                                            {{ row.usernum|number_format }}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                                {{ knp_pagination_render(paginationAAA) }}
+                            {% else %}
+                                No data.
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ 'Users per Country'|trans }}</h3>
+                        </div>
+                        <div id="users_per_country" class="panel-body">
+
+                            {% if paginationBBB.getTotalItemCount > 0 %}
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationBBB, 'Name', 'a.name', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationBBB, 'Code', 'a.code', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationBBB, 'Population', 'a.population', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationBBB, 'No. of Users', 'a.usersnum', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for row in paginationBBB %}
+                                    <tr>
+                                        <td>
+                                            <a href="{{ url('syw_front_main_stats_countries', {'id': row.id}) }}">{{ row.name }}</a>
+                                        </td>
+                                        <td>
+                                            {{ row.code|upper }}
+                                        </td>
+                                        <td>
+                                            {{ row.population|number_format }}
+                                        </td>
+                                        <td>
+                                            {{ row.usersnum|number_format }}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                                {{ knp_pagination_render(paginationBBB) }}
+                            {% else %}
+                                No data.
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- script>
+            $(function() {
+                $('#users_per_city').on('click', "ul.pagination a" , function(e){
+                    $.ajax({
+                        type: "GET",
+                        url: $(this).attr('href')
+                    })
+                            .done(function( msg ) {
+                                $('#users_per_city').html(msg);
+                            });
+                    e.preventDefault();
+                });
+                $('#users_per_country').on('click', "ul.pagination a" , function(e){
+                    $.ajax({
+                        type: "GET",
+                        url: $(this).attr('href')
+                    })
+                            .done(function( msg ) {
+                                $('#users_per_country').html(msg);
+                            });
+                    e.preventDefault();
+                });
+            });
+        </script -->
+        {{ include('SywFrontMainBundle:Common:_guess.html.twig') }}
+        {{ include('SywFrontMainBundle:Common:_stats_links.html.twig') }}
+    </div>
+
+{% endblock %}

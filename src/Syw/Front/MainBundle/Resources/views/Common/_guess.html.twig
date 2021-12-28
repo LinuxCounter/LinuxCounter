@@ -1,0 +1,21 @@
+{% trans_default_domain "footer" %}
+<div class="col-sm-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ 'The estimation of linux users'|trans }}</h3>
+        </div>
+        <div class="panel-body" style="text-align: center;">
+            <span class="bold">
+                {{ 'At this moment, there are <span class="h1" style="display:block;">%stats.guess.usernum%</span> users and <span class="h1" style="display:block;">%stats.guess.machinenum%</span> machines registered.'|trans({
+                    '%stats.guess.usernum%': stats.guess.usernum|number_format,
+                    '%stats.guess.machinenum%': stats.guess.machinenum|number_format
+                })|raw }}
+                <br/>
+                {{ 'My guess at the number of Linux users:'|trans }}<br/>
+                <span id="linux_user_guess" class="h1" style="display:block;">{{ stats.guess.guestimate_users|number_format }}</span>
+                <small>{{ 'World population:'|trans }} <span id="worldpop">{{ stats.guess.world_population|number_format }}</span></small><br/>
+                <small>{{ 'Internet users:'|trans }} <span id="internet_user">{{ stats.guess.world_internet_users|number_format }}</span></small>
+            </span>
+        </div>
+    </div>
+</div>

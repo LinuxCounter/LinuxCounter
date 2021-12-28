@@ -1,0 +1,35 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_manager_correct_citypopulation" %}
+
+{% block body %}
+
+<!-- Page Content -->
+<div class="row">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ 'Manager Console: Merge City Dublicates'|trans }}</h3>
+                </div>
+                <div class="panel-body">
+                    <p><b>ATTENTION:</b> This function will merge <b>two or more cities</b> into one single new city with all the data combined, including the associated users.</p>
+                    <p>&nbsp;</p>
+                    <p>Please choose the entries (at least two!) from the following select box that you want to merge. The selected entries will then get deleted after the new city got created. (press CTRL while clicking to select more than one entry!)</p>
+                    <p>After this merging process is completed, you will get redirected to the newly created city where you then may correct the data of this new city.</p>
+                    <p><b>Please be aware, that your action will get logged. Please try to be sure what you are doing here.</b></p>
+                    <p>&nbsp;</p>
+                    <p>For example, there may be more than one city with the same name in one country. So please check also the coordinates to be sure to merge the correct duplicates!</p>
+                    <p>&nbsp;</p>
+                    <span class="center red"><b>There will be no confirmation question!</b></span>
+                    <p>&nbsp;</p>
+
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

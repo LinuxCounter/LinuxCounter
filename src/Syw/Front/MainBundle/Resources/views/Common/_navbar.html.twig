@@ -1,0 +1,88 @@
+{% trans_default_domain "navigation" %}
+<div id="navwrapper" class="navbar-wrapper">
+    <div class="container">
+
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+
+                <span id="forkongithub">
+                    <a href="https://github.com/christinloehner/linuxcounter.new/issues">
+                        Bugtracker on GitHub
+                    </a>
+                </span>
+
+                {% if accountInfo %}
+                <a href="{{ url('fos_user_profile_show') }}">
+                    <div id="accountInfo" class="accountinfo">
+                        <div class="gravatar responsive">
+                            <img
+                            class="responsive"
+                            src="{{ gravatar(accountInfo.email) }}"
+                            alt="Gravatar image"/>
+                        </div>
+                        <div class="displayname">
+                            {{
+                                'Hello, %accountInfo.displayname% ! :)'
+                                |trans
+                                (
+                                    {
+                                        '%accountInfo.displayname%': accountInfo.displayname
+                                    }
+                                )
+                            }}
+                        </div>
+                    </div></a>
+                {% endif %}
+
+                <div class="navbar-header">
+
+                    <div class="col-xs-10">
+                        <a 
+                        class="navbar-brand" 
+                        href="{{ url('syw_front_main_main_index') }}"
+                        title="{{ 'Go back to the startpage'|trans }}">
+                            <img
+                            class="img-responsive"
+                            src="{{ '/bundles/sywfrontmain/images/lico-logo.480x70.png' }}"
+                            alt="Linuxcounter Logo"
+                            title="Linuxcounter Logo">
+                        </a>
+                    </div>
+
+                    <div class="col-xs-2">
+                        <button 
+                        type="button" 
+                        class="navbar-toggle collapsed" 
+                        data-toggle="collapse" 
+                        data-target="#navbar" 
+                        aria-expanded="false" 
+                        aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    {% for type, messages in app.session.flashBag.all %}
+                        {% for message in messages %}
+                            <div 
+                            class="flash flashbag flash-{{ type }} alert alert-{{ type }} fade in" 
+                            role="alert">
+                                <a class="close" data-dismiss="alert" href="#">&times;</a>
+                                <p>{{ message|trans({}, 'FOSUserBundle') }}</p>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        {{ include('SywFrontMainBundle:Common:_navigation.html.twig') }}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </div>
+</div>

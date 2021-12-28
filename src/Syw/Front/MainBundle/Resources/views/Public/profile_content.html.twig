@@ -1,0 +1,210 @@
+{% trans_default_domain "syw_front_main_public_profile" %}
+
+<div class="syw_front_main_public_profile">
+
+    {% if (thisprivacy.getSecretProfile() == 1) %}
+        <div class="row">
+            This user has hidden his profile.
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-sm-3 leftside">
+
+                <div class="profilegravatar" id="profile_gravatar">
+                    <img src="{{ gravatar(thisuser.email) }}" alt=""/>
+                </div>
+                {% if (thisprivacy.getShowRealName() == 0) %}
+                    <div class="profile_realname">
+                        &nbsp;
+                    </div>
+                {% else %}
+                    {% if (thisuserprofile.firstName or thisuserprofile.lastName) %}
+                        <div class="profile_realname">
+                            {% if thisuserprofile.firstName %}{{ thisuserprofile.firstName }}{% endif %}{% if thisuserprofile.lastName %} {{ thisuserprofile.lastName }}{% endif %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+                <div class="profile_username">
+                    {% if (thisprivacy.getShowRealName() == 0) %}
+                    <div class="profile_realname">
+                        &nbsp;
+                    </div>
+                    {% else %}
+                        {{ thisuser.username }}
+                    {% endif %}
+                </div>
+                <div class="signature_image">
+                    <a href="{{ host }}/cert/{{ thisuser.getId() }}.png"><img src="{{ host }}/cert/{{ thisuser.getId() }}.png" style="width:100%;" alt="{{ 'Use this image in your email or forum signatures'|trans }}" title="{{ 'Use this image in your email or forum signatures'|trans }}"/><br/>
+                        <verysmall>{{ host }}/cert/{{ thisuser.getId() }}.png</verysmall></a>
+                </div>
+
+                <div class="profile_hr">
+                    <hr size="1" noshade="noshade"/>
+                </div>
+                <div class="profile_personalinfo">
+                    {% if thisuserprofile.city %}
+                        <div class="profile_city"><span
+                                class="fa fa-location-arrow"></span> {{ thisuserprofile.city.getName() }} (<a
+                                href="http://www.openstreetmap.org/#map=15/{{ thisuserprofile.city.getLatitude() }}/{{ thisuserprofile.city.getLongitude() }}">{{ 'Show on map'|trans }}</a>)
+                        </div>{% endif %}
+                    {% if (thisprivacy.getShowEmail() == 0) %}
+                        <div class="profile_email"><span class="fa fa-envelope"></span> ~</div>
+                    {% else %}
+                        <div class="profile_email"><span class="fa fa-envelope"></span> {{ thisuser.email|obfuscateEmail }}</div>
+                    {% endif %}
+                    <div class="profile_homepage"><span
+                                class="fa fa-anchor"></span> {% if thisuserprofile.homepage %}{{ thisuserprofile.homepage }}{% else %}No homepage yet{% endif %}
+                    </div>
+                    <div class="profile_language"><span class="fa fa-flag"></span> {{ language }}</div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ 'Personal information'|trans }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="profile_personal_firstname">{{ 'Firstname'|trans }}: {% if (thisprivacy.getShowRealName() == 1) %}{{ thisuserprofile.firstName }}{% else %}<span class="privhidden">hidden</span>{% endif %}</div>
+                                <div id="profile_personal_lastname">{{ 'Lastname'|trans }}: {% if (thisprivacy.getShowRealName() == 1) %}{{ thisuserprofile.lastName }}{% else %}<span class="privhidden">hidden</span>{% endif %}</div>
+                                <div id="profile_personal_birthday">{{ 'Birthday'|trans }}: {{ thisuserprofile.birthday }}</div>
+                                <div id="profile_personal_birthplace">{{ 'Birthplace'|trans }}: {{ thisuserprofile.birthPlace }}</div>
+                                <div id="profile_personal_homepage">{{ 'Homepage'|trans }}: <a
+                                            href="{{ thisuserprofile.homepage }}">{{ thisuserprofile.homepage|length > 30 ? thisuserprofile.homepage|slice(0, 30) ~ '...' : thisuserprofile.homepage }}</a>
+                                </div>
+                                <div id="profile_personal_sincewhen">{{ 'Linux since when'|trans }}: {{ thisuserprofile.sincewhen|date('Y-m') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ 'Location information'|trans }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                {% if (thisprivacy.getShowLocation() == 1) %}
+                                <div id="profile_location_city">{{ 'City'|trans }}: {% if thisuserprofile.city %}{{ thisuserprofile.city.getName() }} (<a
+                                            href="http://www.openstreetmap.org/#map=15/{{ thisuserprofile.city.getLatitude() }}/{{ thisuserprofile.city.getLongitude() }}">{{ 'Show on map'|trans }}</a>){% endif %}
+                                </div>
+                                <div id="profile_location_lat">{{ 'Latitude'|trans }}: {% if thisuserprofile.city %}{{ thisuserprofile.city.getLatitude() }}{% endif %}</div>
+                                <div id="profile_location_long">{{ 'Longitude'|trans }}: {% if thisuserprofile.city %}{{ thisuserprofile.city.getLongitude() }}{% endif %}</div>
+                                {% else %}
+                                    This user has secured his location information
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ 'Contact information'|trans }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                {% if (thisprivacy.getSecretContactInfo() == 0) %}
+                                <div id="profile_contact_icq">{{ 'ICQ'|trans }}: {{ thisuserprofile.icq }}</div>
+                                <div id="profile_contact_skype">{{ 'Skype'|trans }}: {{ thisuserprofile.skype }}</div>
+                                <div id="profile_contact_jabber">{{ 'Jabber'|trans }}: {{ thisuserprofile.jabber }}</div>
+                                <div id="profile_contact_irc">{{ 'IRC'|trans }}: {{ thisuserprofile.irc }}</div>
+                                <div id="profile_contact_gpg">{{ 'PGP/GPG'|trans }}: {{ thisuserprofile.gpg }}</div>
+                                {% else %}
+                                    This user has secured his contact information
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ 'Social information'|trans }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                {% if (thisprivacy.getSecretSocialInfo() == 0) %}
+                                <div id="profile_social_facebook">{{ 'Facebook'|trans }}: <a
+                                            href="{{ thisuserprofile.facebook }}">{{ thisuserprofile.facebook|length > 30 ? thisuserprofile.facebook|slice(0, 30) ~ '...' : thisuserprofile.facebook }}</a>
+                                </div>
+                                <div id="profile_social_google">{{ 'Google+'|trans }}: <a
+                                            href="{{ thisuserprofile.google }}">{{ thisuserprofile.google|length > 30 ? thisuserprofile.google|slice(0, 30) ~ '...' : thisuserprofile.google }}</a>
+                                </div>
+                                <div id="profile_social_twitter">{{ 'Twitter'|trans }}: <a
+                                        href="{{ thisuserprofile.twitter }}">{{ thisuserprofile.twitter|length > 30 ? thisuserprofile.twitter|slice(0, 30) ~ '...' : thisuserprofile.twitter }}</a>
+                                </div>
+                                <div id="profile_social_identica">{{ 'Identi.ca'|trans }}: <a
+                                        href="{{ thisuserprofile.identica }}">{{ thisuserprofile.identica|length > 30 ? thisuserprofile.identica|slice(0, 30) ~ '...' : thisuserprofile.identica }}</a>
+                                </div>
+                                <div id="profile_social_github">{{ 'Github'|trans }}: <a
+                                        href="{{ thisuserprofile.github }}">{{ thisuserprofile.github|length > 30 ? thisuserprofile.github|slice(0, 30) ~ '...' : thisuserprofile.github }}</a>
+                                </div>
+                                <div id="profile_social_linkedin">{{ 'Linkedin'|trans }}: <a
+                                        href="{{ thisuserprofile.linkedin }}">{{ thisuserprofile.linkedin|length > 30 ? thisuserprofile.linkedin|slice(0, 30) ~ '...' : thisuserprofile.linkedin }}</a>
+                                </div>
+                                {% else %}
+                                    This user has secured his social information
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ 'Other information'|trans }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="profile_info_interests">{{ 'Interests'|trans }}: {{ thisuserprofile.interests | nl2br }}</div>
+                                <div id="profile_info_hobbies">{{ 'Hobbies'|trans }}: {{ thisuserprofile.hobbies | nl2br }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="profile_hr">
+                <hr size="1" noshade="noshade"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'Registered Machines'|trans }}</h3>
+                    </div>
+                    <div id="public_machine_table" class="panel-body">
+                        {% if (thisprivacy.getSecretMachines() == 1) %}
+                            <span style="text-align:center">This user has hidden his machines.</span>
+                        {% else %}
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>{{ 'ID'|trans }}</th>
+                                <th>{{ 'Hostname'|trans }}</th>
+                                <th>{{ 'Class'|trans }}</th>
+                                <th>{{ 'Distribution'|trans }}</th>
+                                <th>{{ 'Last Update'|trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for machine in thismachines %}
+                                <tr>
+                                    <td><a class="machinelink" href="{{ url('syw_front_main_public_machine', {'machinenumber': machine.getId()}) }}">{{ machine.getId() }}</a></td>
+                                    <td><a class="machinelink" href="{{ url('syw_front_main_public_machine', {'machinenumber': machine.getId()}) }}">{% if (thisprivacy.getShowHostnames() == 1) %}{{ machine.getHostname() }}{% else %}<span class="privhidden">hidden</span>{% endif %}</a></td>
+                                    <td><a class="machinelink" href="{{ url('syw_front_main_public_machine', {'machinenumber': machine.getId()}) }}">{{ machine.getClass().getName()|capitalize }}</a></td>
+                                    <td><a class="machinelink" href="{{ url('syw_front_main_public_machine', {'machinenumber': machine.getId()}) }}">{% if (thisprivacy.getShowDistribution() == 1) %}{{ machine.getDistribution().getName()|capitalize }}{% else %}<span class="privhidden">hidden</span>{% endif %}</a></td>
+                                    <td><a class="machinelink" href="{{ url('syw_front_main_public_machine', {'machinenumber': machine.getId()}) }}">{{ machine.getModifiedAt()|date('Y-m-d') }}</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% endif %}
+</div>

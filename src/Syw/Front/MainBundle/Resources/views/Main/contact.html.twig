@@ -1,0 +1,50 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_main_main_contact" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'Contact us'|trans }}</h3>
+                    </div>
+                    <div class="panel-body">
+
+
+                        {% for label, flashes in app.session.flashbag.all %}
+                            {% for flash in flashes %}
+                                <div class="alert alert-{{ label }}">
+                                    {{ flash }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+
+                        <p>
+                            {{ 'With this form you can contact the main developer, Christin Löhner, directly.'|trans }}
+                        </p>
+                        <p>&nbsp;</p>
+                        <p>{{ 'But remember, if you think you have found a bug or if you got an error somewhere, please use the <a href="https://github.com/christinloehner/linuxcounter.new/issues">issuetracker application on github.com</a> instead of this contact form. That way we\'ll have all problems at one place and we can follow the fixing process, thanks!' |trans|raw }}</p>
+
+                        <p>&nbsp;</p>
+
+
+                        <form action="{{ url('syw_front_main_main_contact') }}" method="post" {{ form_enctype(form) }}>
+                        {{ form_widget(form) }}
+
+
+                        <button type="submit" class="btn-default">{{ 'Send'|trans }}</button>
+
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

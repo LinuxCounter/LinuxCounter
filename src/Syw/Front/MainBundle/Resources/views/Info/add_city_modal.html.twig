@@ -1,0 +1,44 @@
+<!-- Modal -->
+{% trans_default_domain "syw_front_main_info_edit" %}
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">{{ 'Add your city here'|trans }}</h3>
+                <h4>{{ 'If you are really sure, that your city is not findable in the auto suggest list when editing your profile, then please add it here.'|trans }}</h4>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url('syw_front_main_info_addcity') }}" method="post" id="arrt">
+                    <div class="form-group">
+                        {{ form_errors(cityform.isoCountryCode) }}
+                        {{ form_widget(cityform.isoCountryCode) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(cityform.region) }}
+                        {{ form_widget(cityform.region) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(cityform.name) }}
+                        {{ form_widget(cityform.name) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(cityform.latitude) }}
+                        {{ form_widget(cityform.latitude) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(cityform.longitude) }}
+                        {{ form_widget(cityform.longitude) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(cityform.population) }}
+                        {{ form_widget(cityform.population) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_rest(cityform) }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

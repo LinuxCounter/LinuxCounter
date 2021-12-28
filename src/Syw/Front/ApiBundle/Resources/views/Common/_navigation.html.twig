@@ -1,0 +1,60 @@
+{% trans_default_domain "navigation" %}
+<li>
+    <a href="{{ url('syw_front_main_main_index') }}"><span class="fa fa-home"></span>{{ 'Home'|trans }}</a>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li>
+    <a href="http://blog.linuxcounter.net" title="{{ 'Visit our Blog here...'|trans }}"><span class="fa fa-home"></span>{{ 'Blog'|trans }}</a>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li>
+    <a href="{{ url('news_homepage') }}"><span class="fa fa-newspaper-o"></span>{{ 'News'|trans }}</a>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'Statistics'|trans }} <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="{{ url('syw_front_main_stats_index') }}">{{ 'Statistics mainpage'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_stats_users') }}">{{ 'User statistics'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_stats_machines') }}">{{ 'Machine statistics'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_stats_distributions') }}">{{ 'Distribution statistics'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_stats_kernels') }}">{{ 'Kernel statistics'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_stats_uptimes') }}">{{ 'Uptime statistics'|trans }}</a></li>
+        <li class="footer-menu-divider">&sdot;</li>
+        <li><a href="{{ url('syw_front_main_stats_counter') }}">{{ 'Linux Counter statistics'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_stats_kernel') }}" title="{{ 'Linux Kernel fun statistics'|trans }}">{{ 'Linux Kernel Fun statistics'|trans }}</a></li>
+    </ul>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li>
+    <a href="{{ url('syw_front_main_main_download') }}">{{ 'Download'|trans }}</a>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li>
+    <a href="{{ url('syw_front_api_default_index') }}">{{ 'API'|trans }}</a>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'ToolBox'|trans }} <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="{{ url('syw_front_toolbox_default_index') }}" title="{{ 'Go to the Linux Commands Reference...'|trans }}">{{ 'Linux Commands Reference'|trans }}</a></li>
+    </ul>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'Info'|trans }} <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="{{ url('syw_front_main_main_about') }}" title="{{ 'Read some information about us and this project...'|trans }}">{{ 'About us'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_main_press') }}">{{ 'In the press'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_main_faq') }}" title="{{ 'Read the frequently asked questions...'|trans }}">{{ 'FAQ'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_main_contact') }}" title="{{ 'Contact us in case of questions or problems...'|trans }}">{{ 'Contact'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_main_sponsor') }}" title="{{ 'See here who sponsors us...'|trans }}">{{ 'Sponsor'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_main_impressum') }}" title="{{ 'Read our imprint...'|trans }}">{{ 'Imprint'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_main_privacypolicy') }}" title="{{ 'Read our privacy policy...'|trans }}">{{ 'Privacy Policy'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_main_tos') }}" title="{{ 'Read our ToS...'|trans }}">{{ 'Terms of Service'|trans }}</a></li>
+    </ul>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li>
+    <a href="{{ url('syw_front_main_main_donations') }}">{{ 'Donations'|trans }}</a>
+</li>

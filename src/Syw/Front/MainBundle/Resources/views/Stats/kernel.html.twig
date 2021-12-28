@@ -1,0 +1,91 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_main_stats_counter" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <script src="//code.highcharts.com/highcharts.js"></script>
+                    <script src="//code.highcharts.com/modules/exporting.js"></script>
+
+                    <script type="text/javascript">
+                        $(function(){
+
+                            Highcharts.theme = {
+                                // colors: ['#058DC7', '#ed561b', '#50B432', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+                                plotOptions: {
+                                    series: {
+                                        fillColor: {
+                                            linearGradient: [0, 0, 0, 300],
+                                            stops: [
+                                                [0, Highcharts.getOptions().colors[0]],
+                                                [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                            ]
+                                        },
+                                        marker: {
+                                            radius: 2
+                                        },
+                                        lineWidth: 1,
+                                        states: {
+                                            hover: {
+                                                lineWidth: 1
+                                            }
+                                        },
+                                        threshold: null
+                                    }
+                                }
+                            };
+
+                            Highcharts.setOptions(Highcharts.theme);
+
+                            {{ chart(chart_linesofcode, false) }}
+                            {{ chart(chart_badwords, false) }}
+                            {{ chart(chart_goodwords, false) }}
+
+                        });
+                    </script>
+
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ title1 }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="chart_linesofcode" style=""></div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ title2 }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="chart_badwords" style=""></div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ title3 }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="chart_goodwords" style=""></div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        {{ include('SywFrontMainBundle:Common:_guess.html.twig') }}
+        {{ include('SywFrontMainBundle:Common:_stats_links.html.twig') }}
+    </div>
+{% endblock %}

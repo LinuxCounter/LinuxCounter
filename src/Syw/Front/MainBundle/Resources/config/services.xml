@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+
+    <services>
+        <service id="whisnet_irc_bot.bot_command_import_listener" class="Syw\Front\MainBundle\EventListener\IrcBotImportListener">
+            <tag name="whisnet_irc_bot.bot_command" command="import" help="Gives information about the actual import status"/>
+            <tag name="kernel.event_listener" event="whisnet_irc_bot.bot_command_import" method="onCommand"/>
+            <argument type="service" id="whisnet_irc_bot.connection"/>
+        </service>
+        <service id="whisnet_irc_bot.bot_command_restart_listener" class="Syw\Front\MainBundle\EventListener\IrcBotRestartListener">
+            <tag name="whisnet_irc_bot.bot_command" command="restart" help="Restarts the bot"/>
+            <tag name="kernel.event_listener" event="whisnet_irc_bot.bot_command_restart" method="onCommand"/>
+            <argument type="service" id="whisnet_irc_bot.connection"/>
+        </service>
+    </services>
+
+</container>

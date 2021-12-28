@@ -1,0 +1,95 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_main_main_downloads" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div id="download" class="row">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'Download the free Linux Counter Machine Update Script'|trans }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <span style="float:right;margin-left:20px;">
+                            <a href="https://play.google.com/store/apps/details?id=com.linuxcounter.lico_update_003" title="Android app on Google Play">
+                                <img alt="Android app on Google Play" title="Android app on Google Play"
+                                     src="https://developer.android.com/images/brand/en_app_rgb_wo_60.png" />
+                            </a><br/>
+
+                            <a href="https://f-droid.org/repository/browse/?fdid=com.linuxcounter.lico_update_003" title="Android app on F-Droid">
+                                <img alt="Android app on F-Droid" title="Android app on F-Droid"
+                                     src="https://f-droid.org/wiki/images/d/d3/F-Droid-button_bigger.png" />
+                            </a><br/>
+
+
+
+
+
+                        </span>
+                        <p>
+                            There is no need to visit this website and log into your account every day in order to update your machines data (Uptime, RAM, etc...). Instead get the free and open source lico-update script here, create a weekly cronjob through a simple command and be sure that your machine is always up to date.
+                        </p>
+                        <p>&nbsp;</p>
+                        <p>
+                            The very new lico-update script for the new RESTful API is, like this website too, maintained on <a href="https://github.com/christinloehner/linuxcounter-update-examples/tree/master/_official">github</a>. So if you encounter any problems or issues with this script, please use the <a href="https://github.com/christinloehner/linuxcounter-update-examples/issues">github issuetracker</a> to file a bugreport.
+                        </p>
+                        <p>&nbsp;</p>
+<code><article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
+            <a id="user-content-lico-updatesh" class="anchor" href="#lico-updatesh" aria-hidden="true"><span class="octicon octicon-link"></span></a>lico-update.sh</h1>
+
+        <p>The lico-update.sh script is the new official machine update script for the new RESTful API on linuxcounter.net</p>
+
+        <ul class="task-list">
+            <li>Update your linuxcounter machines directly via this script without the need for log into your account</li>
+            <li>Automate the machine update by installing a cronjob by invoking a simple command</li>
+        </ul>
+
+        <h3>
+            <a id="user-content-installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h3>
+
+        <p>Download the file "lico-update.sh" from github, move it into your PATH and make it executable:</p>
+
+        <div class="highlight highlight-sh"><pre>wget https://github.com/christinloehner/linuxcounter-update-examples/raw/master/_official/lico-update.sh
+chmod +x lico-update.sh
+sudo mv lico-update.sh /usr/local/bin/lico-update.sh</pre></div>
+
+        <p><strong>Or</strong> clone the repository in order to be able to contribute to the code, enhance the script, fixing bugs and sending pull requests:</p>
+
+        <div class="highlight highlight-sh"><pre>git clone https://github.com/christinloehner/linuxcounter-update-examples.git
+<span class="pl-c1">cd</span> linuxcounter-update-examples/_official
+sudo cp lico-update.sh /usr/local/bin/lico-update.sh</pre></div>
+
+        <h3>
+            <a id="user-content-usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+        <p>First start the script by using the "-h" parameter to get some help:</p>
+
+        <div class="highlight highlight-sh"><pre>lico-update.sh -h</pre></div>
+
+        <p>You may use the interactive mode of the script for being guided through the machine registration and sending the data:</p>
+
+        <div class="highlight highlight-sh"><pre>lico-update.sh -i</pre></div>
+
+        <h3>
+            <a id="user-content-license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h3>
+
+        <hr>
+
+        <p>GNU General Public License Version 3</p>
+
+        <p><strong>Free Software, Hell Yeah!</strong></p>
+    </article></code>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

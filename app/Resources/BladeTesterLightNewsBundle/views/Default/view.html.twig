@@ -1,0 +1,15 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "news_view" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-12">
+                {% include 'BladeTesterLightNewsBundle:Elements:detailOfNews.html.twig' with {'pieceOfNews' : news} %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

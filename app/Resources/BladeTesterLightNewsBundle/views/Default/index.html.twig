@@ -1,0 +1,27 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "news_homepage" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-12">
+
+
+                {% if not news %}
+                    <p>{{ 'bladetester_lightnews.interfaces.list.no_news'|trans }}</p>
+                {% else %}
+                    <div id="news-list">
+                        {% for pieceOfNews in news %}
+                            {% include 'BladeTesterLightNewsBundle:Elements:pieceOfNews.html.twig' with {'pieceOfNews' : pieceOfNews} %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

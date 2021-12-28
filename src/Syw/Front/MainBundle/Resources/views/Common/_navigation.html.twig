@@ -1,0 +1,88 @@
+{% trans_default_domain "navigation" %}
+<li>
+    <a href="{{ url('syw_front_main_main_index') }}" title="{{ 'Back to the main page...'|trans }}"><span class="fa fa-home"></span>{{ 'Home'|trans }}</a>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li>
+    <a href="http://blog.linuxcounter.net" title="{{ 'Visit our Blog here...'|trans }}"><span class="fa fa-home"></span>{{ 'Blog'|trans }}</a>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li>
+    <a href="{{ url('news_homepage') }}" title="{{ 'Read the latest news and announcements...'|trans }}"><span class="fa fa-newspaper-o"></span>{{ 'News'|trans }}</a>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'Statistics'|trans }} <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="{{ url('syw_front_main_stats_index') }}" title="{{ 'Go to the mainpage of the statistics...'|trans }}">{{ 'Statistics mainpage'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_stats_users') }}" title="{{ 'Go to the statistics for the users...'|trans }}">{{ 'User statistics'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_stats_machines') }}" title="{{ 'Go to the statistics for the machines...'|trans }}">{{ 'Machine statistics'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_stats_distributions') }}" title="{{ 'Go to the statistics for the distributions...'|trans }}">{{ 'Distribution statistics'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_stats_kernels') }}" title="{{ 'Go to the statistics for the kernels...'|trans }}">{{ 'Kernel statistics'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_stats_uptimes') }}" title="{{ 'Go to the statistics for the uptimes...'|trans }}">{{ 'Uptime statistics'|trans }}</a></li>
+        <li class="footer-menu-divider">&sdot;</li>
+        <li><a href="{{ url('syw_front_main_stats_counter') }}" title="{{ 'Go to the statistics for the counter itself...'|trans }}">{{ 'Linux Counter statistics'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_stats_kernel') }}" title="{{ 'Linux Kernel fun statistics'|trans }}">{{ 'Linux Kernel Fun statistics'|trans }}</a></li>
+    </ul>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li>
+    <a href="{{ url('syw_front_main_main_download') }}" title="{{ 'Download the new lico update script here...'|trans }}">{{ 'Download'|trans }}</a>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li>
+    <a href="http://api.linuxcounter.net" title="{{ 'Read our RESTful API documentation...'|trans }}">{{ 'API'|trans }}</a>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'ToolBox'|trans }} <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="{{ url('syw_front_toolbox_default_index') }}" title="{{ 'Go to the Linux Commands Reference...'|trans }}">{{ 'Linux Commands Reference'|trans }}</a></li>
+    </ul>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'Info'|trans }} <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="{{ url('syw_front_main_main_about') }}" title="{{ 'Read some information about us and this project...'|trans }}">{{ 'About us'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_main_press') }}">{{ 'In the press'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_main_faq') }}" title="{{ 'Read the frequently asked questions...'|trans }}">{{ 'FAQ'|trans }}</a></li>
+        <li><a href="http://blog.linuxcounter.net/contact/" title="{{ 'Contact us in case of questions or problems...'|trans }}">{{ 'Contact'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_main_sponsor') }}" title="{{ 'See here who sponsors us...'|trans }}">{{ 'Sponsor'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_main_impressum') }}" title="{{ 'Read our imprint...'|trans }}">{{ 'Imprint'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_main_privacypolicy') }}" title="{{ 'Read our privacy policy...'|trans }}">{{ 'Privacy Policy'|trans }}</a></li>
+        <li><a href="{{ url('syw_front_main_main_tos') }}" title="{{ 'Read our ToS...'|trans }}">{{ 'Terms of Service'|trans }}</a></li>
+    </ul>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+<li>
+    <a href="{{ url('syw_front_main_main_donations') }}" title="{{ 'If you want to support us and the project, go here...'|trans }}">{{ 'Donations'|trans }}</a>
+</li>
+<li class="footer-menu-divider">&sdot;</li>
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'Account'|trans }} <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="{{ url('fos_user_profile_show') }}">{{ 'Show Profile'|trans }}</a></li>
+            <li><a href="{{ url('syw_front_main_public_profile', {'counternumber': user.getId()}) }}">{{ 'Show public Profile'|trans }}</a></li>
+            <li><a href="{{ url('fos_user_profile_edit') }}">{{ 'Edit Account'|trans }}</a></li>
+            <li><a href="{{ url('syw_front_main_info_edit') }}">{{ 'Edit Profile'|trans }}</a></li>
+            <li><a href="{{ url('syw_front_main_privacy_edit') }}">{{ 'Edit Privacy settings'|trans }}</a></li>
+            <li><a href="{{ url('syw_front_main_machine_create') }}">{{ 'Register new machine'|trans }}</a></li>
+            <li class="footer-menu-divider">&sdot;</li>
+            <li><a href="{{ url('syw_front_main_account_delete') }}"><span class="red">{{ 'Delete this account and machines!'|trans }}</span></a></li>
+        </ul>
+    </li>
+    <li class="footer-menu-divider">&sdot;</li>
+    <li>
+        <a href="{{ url('fos_user_security_logout') }}">{{ 'Logout'|trans }}</a>
+    </li>
+{% else %}
+    <li>
+        <a href="{{ url('fos_user_security_login') }}" title="{{ 'Log into your account...'|trans }}">{{ 'Sign in'|trans }}</a>
+    </li>
+    <li class="footer-menu-divider">&sdot;</li>
+    <li>
+        <a href="{{ url('fos_user_registration_register') }}" title="{{ 'Register for an user account here...'|trans }}">{{ 'Sign up'|trans }}</a>
+    </li>
+{% endif %}

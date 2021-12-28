@@ -1,0 +1,103 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_main_main_index" %}
+
+{% block body %}
+
+    <style>
+        #trumpisnotmypresident p {
+            margin-top: 20px;
+        }
+        .carousel {
+            margin-top: 30px !important;
+        }
+    </style>
+
+    {{ include('SywFrontMainBundle:Common:_carousel.html.twig') }}
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row marketing">
+            <div class="col-lg-4">
+                <a href="{{ url('syw_front_main_stats_index') }}"
+                   title="{{ 'View our statistics about Linux, its Distributions, Kernels, Users and Machines'|trans }}"><img
+                            class="img-circle"
+                            src="{{ 'bundles/sywfrontmain/images/heading.circle.001.jpg' }}"
+                            alt="Circle image for Statistics" title="Circle image for Statistics" width="140"
+                            height="140"/></a>
+
+                <h2>{{ 'Statistics'|trans }}</h2>
+
+                <h3>{{ 'We are providing the most accurate and complete statistics for linux in the world wide web.'|trans }}
+                    {{ 'This also includes the most used distributions, also per country or city, the most used kernel versions, usage statistics, network statistics, user statistics per country or city, most used cpus, top linux uptimes lists, the number of linux users worldwide and much more.'|trans }}</h3>
+
+                <p><a class="btn btn-default" href="{{ url('syw_front_main_stats_index') }}"
+                      title="{{ 'View our statistics about Linux, its Distributions, Kernels, Users and Machines'|trans }}"
+                      role="button">{{ 'View details'|trans }} &raquo;</a></p>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <a href="{{ url('syw_front_main_stats_index') }}"
+                   title="{{ 'View our statistics about Linux, its Distributions, Kernels, Users and Machines'|trans }}"><img
+                            class="img-circle"
+                            src="{{ 'bundles/sywfrontmain/images/heading.circle.002.jpg' }}"
+                            alt="Circle image for Linux users" title="Circle image for Linux users" width="140"
+                            height="140"/></a>
+
+                <h2>{{ 'Linux users in the world'|trans }}</h2>
+
+                <h3>{{ 'Our estimation of how many linux users there are in the world, is probably the closest guess you can get.'|trans }}
+                    {{ 'This is measured by the access logs of many great websites, together with our statistics and the statistical numbers of worldometers.info.'|trans|raw }}</h3>
+
+                <p><a class="btn btn-default" href="{{ url('syw_front_main_stats_index') }}"
+                      title="{{ 'View our statistics for Linux, its Distributions, Kernels, Users and Machines'|trans }}"
+                      role="button">{{ 'View details'|trans }} &raquo;</a></p>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <a href="http://api.linuxcounter.net"
+                   title="{{ 'View our RESTful API documentation and learn how to use it.'|trans }}"><img
+                            class="img-circle"
+                            src="{{ 'bundles/sywfrontmain/images/heading.circle.003.jpg' }}"
+                            alt="Circle image for Services and API" title="Circle image for Services and API"
+                            width="140" height="140"/></a>
+
+                <h2>{{ 'Service and RESTful API'|trans }}</h2>
+
+                <h3>{{ 'All of our generated data and statistics is publicy available through our cool, RESTful API. After registering an account, you will get an ApiKey automatically
+                assigned to your account. Get your ApiKey in your user profile. The Restful API is completly free to use, but a small credits for the Linux Counter Project would be greatly appreciated.'|trans }}</h3>
+
+                <p><a class="btn btn-default" href="http://api.linuxcounter.net"
+                      title="{{ 'View our RESTful API documentation and learn how to use it.'|trans }}"
+                      role="button">{{ 'View details'|trans }} &raquo;</a></p>
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row marketing">
+            <div class="col-lg-12">
+
+                <h1>{{ 'The Linux Counter Project - Statistics about Linux'|trans }}</h1>
+                <h2>{{ 'Best distribution, most used distribution, distributions statistics, most used CPUs, most used kernel versions, highest uptimes, Linux user statistics per country and city, Linux kernel statistics and many, many more...'|trans }}</h2>
+                <h3>{{ 'The <em>Linux Counter Project</em> was created in order to revive and replace the good old linux counter project on counter.li.org.'|trans|raw }}</h3>
+                <h4>{{ 'Since January 11, 2012 counter.li.org redirects directly to linuxcounter.net and thus, linuxcounter.net is the only and main real linux counter with the greatest userbase.'|trans|raw }}</h4>
+
+                <h4>{{ 'The original <em>Linux Counter</em> was run by a nonprofit membership organization called the <em>Linux Counter Project</em>. This organization was created on May 1, 1999, taking over the running of the counter from Harald Tveit Alvestrand, who has been running the project since 1993. Harald Alvestrand is chief executive officer of the organization.'|trans|raw }}</h4>
+                <h4>{{ 'It was started as a "for fun" project to find out how many Linux users there are worldwide. The basic idea is for people to register themselves as being a Linux user. Of course, this way you won\'t get all Linux users counted as not every Linux user will register himself at the <em>Linux Counter</em> site. Thus, the only way to "know" the number of Linux users worldwide, is to make a guess, preferably a not-too-wild guess of the number of Linux users. Not making wild guesses there is only one way to go: <b>statistics</b>. And so, there we are.'|trans|raw }}</h4>
+                <h4>{{ 'Also see <a href="http://en.wikipedia.org/wiki/Linux_Counter" title="Link to wikipedia article about the Linux Counter">this wikipedia article</a> for information about the <em>Linux Counter</em> Project. On the 10th of september in 2011, we also were "<a href="http://en.wikipedia.org/wiki/Slashdotted" title="Link to the wikipedia article about what is slashdotted">slashdotted</a>". <a href="http://linux.slashdot.org/story/11/09/10/1249257/the-linux-counter-relaunches" title="Link to slashdot article about the Linux Counter">See this article here</a>.'|trans|raw }}</h4>
+                <h4>{{ 'One thing about the development itself: We are always talking in the "we" and "our" format, but actually only one person is developing, maintaining and leading this project: Christin Löhner'|trans|raw }}</h4>
+                <h4>{{ 'I, Christin, would be very, very glad about some help! So, the new page is developed through Github.com. It would be really cool, if you would fork the project and submit pull requests, if you have something developed or fixed.'|trans|raw }}</h4>
+                <h4>{{ 'If you really want to help me with this project and you\'re dreaming in php classes and methods, please contact me and I would be glad to welcome you in my team and give you direct access to the repository.'|trans|raw }}</h4>
+                <h4>{{ 'So, the last thing to mention is, that we would be very, very glad about EVERY feature request, reported issue or bug and also about every compliment or praise you want to tell us! Any <a href="/donations">donations are also welcome</a>! :-)'|trans|raw }}</h4>
+                <h4>{{ '<strong>Please report any bug, problem or also feature requests to our bugtracker on github. See the link in the footer of every page.</strong>'|trans|raw }}</h4>
+            </div>
+        </div>
+        <p> &nbsp; </p>
+
+        <p> &nbsp; </p>
+
+        <p> &nbsp; </p>
+    </div>
+
+{% endblock %}

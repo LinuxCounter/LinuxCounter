@@ -1,0 +1,114 @@
+<!-- /END THE FEATURETTES -->
+
+{% trans_default_domain "footer" %}
+<div class="footercontainer">
+
+    <footer>
+        <div class="banner">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row content language-selection">
+                        <div class="col-sm-12">
+                            <form action="{{ path('syw_front_main_main_lang') }}" method="post">
+                                <select name="language" id="languages">
+                                    {% for language in languages %}
+                                        <option value="{{ language.locale }}"
+                                                {% if app.request.getLocale() == language.locale %}selected="selected"{% endif %}> {{ language.language }}</option>
+                                    {% endfor %}
+                                </select>
+                                <input type="submit" value="{{ 'Choose language...'|trans }}">
+                            </form>
+                        </div>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            {% if enable_transtool == "true" %}
+                                <div class="col-sm-12" style="text-align: center;">
+                                    <span id="translate_page_button" class="button-lite">{{ 'Translate this page into your native language!'|trans }}</span>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <p> &nbsp; </p>
+                    <div class="row footerlinks">
+                        <div class="content">
+                            <a href="{{ url('syw_front_main_main_index') }}" title="{{ 'Back to the main page...'|trans }}">{{ 'Home'|trans }}</a> &middot;
+                            <a href="{{ url('news_homepage') }}" title="{{ 'Read the latest news and announcements...'|trans }}">{{ 'News'|trans }}</a> &middot;
+                            <a href="{{ url('syw_front_main_stats_index') }}" title="{{ 'Go to the mainpage of the statistics...'|trans }}">{{ 'Statistics'|trans }}</a> &middot;
+                            <a href="{{ url('syw_front_main_main_download') }}" title="{{ 'Download the new lico update script here...'|trans }}">{{ 'Download'|trans }}</a> &middot;
+                            <a href="{{ url('syw_front_main_main_about') }}" title="{{ 'Read some information about us and this project...'|trans }}">{{ 'About'|trans }}</a> &middot;
+                            <a href="{{ url('syw_front_main_main_faq') }}" title="{{ 'Read the frequently asked questions...'|trans }}">{{ 'FAQ'|trans }}</a> &middot;
+                            <span class="link githubissues" title="github issues">{{ 'Bugtracker'|trans }}</span> &middot;
+                            <span class="link github" title="{{ 'See the source code of this page...'|trans }}">{{ 'Code base'|trans }}</span> &middot;
+                            <span class="link travis" title="{{ 'See here for the automated builds...'|trans }}">{{ 'Unittests'|trans }}</span> &middot;
+                            <a href="http://blog.linuxcounter.net/feed/" title="{{ 'Get our RSS feed for our news and announcements'|trans }}"><img class="img-responsive" src="https://www.linuxcounter.net/bundles/sywfrontmain/images/rss.png" alt="{{ 'Our RSS feed'|trans }}" title="{{ 'Our RSS feed'|trans }}"/></a><br>
+                            <span class="link versioneye" >{{ 'Dependencies'|trans }}</span> &middot;
+                            <span class="link license" title="{{ 'See here the license for this project...'|trans }}">{{ 'License'|trans }}</span> &middot;
+                            <a href="{{ url('syw_front_main_main_sponsor') }}" title="{{ 'See here who sponsors us...'|trans }}">{{ 'Sponsor'|trans }}</a> &middot;
+                            <a href="{{ url('syw_front_main_main_impressum') }}" title="{{ 'Read our imprint...'|trans }}">{{ 'Imprint'|trans }}</a> &middot;
+                            <a href="{{ url('syw_front_main_main_privacypolicy') }}" title="{{ 'Read our privacy policy...'|trans }}">{{ 'Privacy Policy'|trans }}</a> &middot;
+                            <a href="{{ url('syw_front_main_main_tos') }}" title="{{ 'Read our ToS...'|trans }}">{{ 'Terms of Service'|trans }}</a> &middot;
+                            <a href="http://blog.linuxcounter.net/contact/" title="{{ 'Contact us in case of questions or problems...'|trans }}">{{ 'Contact'|trans }}</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                &middot; <a href="{{ url('news_admin_list') }}">{{ 'News-Admin'|trans }}</a>
+                                &middot; <a href="{{ url('admin') }}">{{ 'Administration'|trans }}</a>
+                            {% endif %}
+                            <br/>
+                        </div>
+                    </div>
+                    <p> &nbsp; </p>
+                    <div class="row onlineusers">
+                        {{ "There were %onlineusers% users online during the last 5 minutes. %onlineloggedin% users were logged in."|trans({
+                            '%onlinecomplete%': online.complete,
+                            '%onlineusers%': online.users,
+                            '%onlinebots%': online.bots,
+                            '%onlineloggedin%': online.loggedin
+                        })|raw }}<br/>
+                        {{ "The record is %onlineusers% online users at %onlinedate%."|trans({
+                            '%onlineusers%': online.highest.count,
+                            '%onlinedate%': online.highest.date|date('Y-m-d H:i')
+                        })|raw }}
+                    </div>
+                </div>
+            </div>
+            <div id="contact" class="container">
+                {% if ( app.environment == 'prod' ) and ( app.request.attributes.get('_route') != 'fos_user_resetting_check_email' ) %}
+                <div id="lico-footer" class="row ads_footer">
+                    <div class="col-sm-12">
+                        <!-- LiCo Footer NEU -->
+                        <ins class="adsbygoogle"
+                             data-ad-client="ca-pub-9187097149837683"
+                             data-ad-slot="7909182251"
+                             data-ad-format="auto"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        {{ include('SywFrontMainBundle:Common:_social.html.twig') }}
+                    </div>
+                </div>
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.banner -->
+
+        <p>&nbsp;</p>
+        <p class="copyright">The Linux Counter Project is <a href="{{ url('syw_front_main_main_sponsor') }}" title="Our sponsor information">fully sponsored</a> by <a
+                    href="https://www.first-colo.net/" target="_blank" title="Our sponsor First Colo">First Colo</a>.<br/>
+            The Linux Counter Newsletter is <a href="{{ url('syw_front_main_main_sponsor') }}" title="Our sponsor information">fully sponsored</a> by <a
+                    href="https://www.phplist.com/" target="_blank" title="phpList">phpList.com</a>.<br/>
+            LiCo, The Linux Counter Project, LiCo - The New Linux Counter Project - linuxcounter.net, Copyright © 2011
+            - {{ "now"|date('Y') }} by <a href="https://github.com/christinloehner" title="Christin on github">Christin Löhner</a>. All rights
+            reserved.<br>
+            The code of The Linux Counter Project is licensed under the <a
+                    href="https://github.com/christinloehner/linuxcounter.new/blob/master/LICENSE" title="The License of the Linux Counter">GPL v3</a>.<br>
+            Original project counter.li.org © 1993 - 2011 by Harald Tveit Alvestrand &amp; the Linux Counter Project -
+            Linux is a registered trademark of Linus Torvalds.</p>
+
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+    </footer>
+
+</div>

@@ -1,0 +1,45 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_main_main_about" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'About The Linux Counter Project'|trans }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h2><em>The Linux Counter Project</em></h2>
+
+                        <p>
+                            The <em>Linux Counter Project</em> was created in order to revive and replace the good old linux counter project on <a href="http://counter.li.org" title="Link to the old counter project">counter.li.org</a>.<br>
+                            Since January 11, 2012 counter.li.org redirects directly to linuxcounter.net and thus, linuxcounter.net is the only and main real linux counter with the greatest userbase.
+                        </p>
+                        <p>
+                            The original <em>Linux Counter</em> was run by a nonprofit membership organization called the <em>Linux Counter</em> Project. This organization was created on May 1, 1999, taking over the running of the counter from Harald Tveit Alvestrand, who has been running the project since 1993. Harald Alvestrand is chief executive officer of the organization.<br>
+                            <br>It was started as a "for fun" project to find out how many Linux users there are worldwide. The basic idea is for people to register themselves as being a Linux user. Of course, this way you won't get all Linux users counted as not every Linux user will register himself at the <em>Linux Counter</em> site. Thus, the only way to "know" the number of Linux users worldwide, is to make a guess, preferably a not-too-wild guess of the number of Linux users. Not making wild guesses there is only one way to go: <b>statistics</b>. And so, there we are.<br>
+                            <br>Also see <a href="http://en.wikipedia.org/wiki/Linux_Counter" title="Link to wikipedia article about the Linux Counter">this wikipedia article</a> for information about the <em>Linux Counter</em> Project. On the 10th of september in 2011, we also were "<a href="http://en.wikipedia.org/wiki/Slashdotted" title="Link to the wikipedia article about what is slashdotted">slashdotted</a>". <a href="http://linux.slashdot.org/story/11/09/10/1249257/the-linux-counter-relaunches" title="Link to slashdot article about the Linux Counter">See this article here</a>.<br>
+                        </p>
+                        <p>One thing about the development itself: We are always talking in the "we" and "our" format, but
+                            actually only one person is developing, maintaining and leading this project: Christin Löhner</p>
+                        <p>I, Christin, would be very, very glad about some help! So, the new page is developed through <a href="https://github.com/christinloehner/linuxcounter.new">github</a>.
+                            It would be really cool, if you would fork the project and submit pull requests, if you have something developed or fixed.</p>
+                        <p>If you really want to help me with this project and you're dreaming in php classes and methods, please contact me and I would be glad to welcome you in my team and give you direct access to the repository. </p>
+                        <p> &nbsp; </p>
+                        <p>So, the last thing to mention is, that we would be very, very glad about EVERY feature
+                            request, reported issue or bug and also about every compliment or praise you want to tell
+                            us! Any <a href="{{ url('syw_front_main_main_donations') }}">donations are also welcome</a>! :-)</p>
+                        <p> &nbsp; </p>
+
+                        <p><strong>Please report any bug, problem or also feature requests to
+                                <a href="https://github.com/christinloehner/linuxcounter.new/issues">our bugtracker on github</a>.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

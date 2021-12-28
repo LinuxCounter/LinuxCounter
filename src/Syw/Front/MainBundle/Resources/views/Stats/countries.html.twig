@@ -1,0 +1,106 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_main_stats_countries" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ title }}</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge">{{ country.getMachines()|length|number_format }} {{ 'Machines'|trans }}</span>
+                                    <span class="badge">{{ country.getUsers()|length|number_format }} {{ 'Users'|trans }}</span>
+                                    {{ 'Country: %country.name% (%country.code%)'|trans({
+                                        '%country.name%': country.getName(),
+                                        '%country.code%': country.getCode()|upper,
+                                    }) }}
+                                </li>
+                            </ul>
+                            <p>
+                                {{ 'The country %country.name% has a population of %country.population% peoples while only %country.users% Linux users are registered in our database.'|trans({
+                                    '%country.name%': country.getName(),
+                                    '%country.population%': country.getPopulation()|number_format,
+                                    '%country.users%': country.getUsers()|length|number_format,
+                                }) }}
+                            </p>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ 'Users per City in country %country.name%'|trans({
+                                    '%country.name%': country.getName()
+                                }) }}</h3>
+                        </div>
+                        <div id="users_per_city" class="panel-body">
+                            <span>{{ 'The ability to set the city where you are living, is a new feature in this new website and thus, the numbers will be dramatically small. It is up to YOU, to set the city in your profile in order to get more accurate statistics.'|trans }}<br/><br/></span>
+                            {% if paginationAAA.getTotalItemCount > 0 %}
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationAAA, 'Name', 'b.name', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationAAA, 'Region', 'b.region', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationAAA, 'Population', 'b.population', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationAAA, 'No. of Users', 'b.usernum', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for row in paginationAAA %}
+                                        <tr>
+                                            <td>
+                                                <div class="col-sm-11">
+                                                    <a href="{{ url('syw_front_main_stats_cities', {'id': row.id}) }}">{{ row.name }}</a>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <a href="http://www.openstreetmap.org/#map=15/{{ row.getLatitude() }}/{{ row.getLongitude() }}"><img class="img-responsive" src="{{ '/bundles/sywfrontmain/images/map.png' }}" alt="View on map..."/></a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {{ row.region }}
+                                            </td>
+                                            <td>
+                                                {{ row.population|number_format }}
+                                            </td>
+                                            <td>
+                                                {{ row.usernum|number_format }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                                {{ knp_pagination_render(paginationAAA) }}
+                            {% else %}
+                                No data.
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        {{ include('SywFrontMainBundle:Common:_guess.html.twig') }}
+        {{ include('SywFrontMainBundle:Common:_stats_links.html.twig') }}
+    </div>
+
+{% endblock %}

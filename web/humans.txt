@@ -1,0 +1,25 @@
+/* Team */
+
+    Role:    Founder, Chef, web development, web design, maintainer, support, server administrator
+	Name:    Alexander Loehner
+	Contact: alex.loehner [at] linux.com
+	Twitter: @NewLinuxCounter
+	Jabber:  linuxcounter@jabber.de
+	IRC:     #linuxcounter on freenode, nick: criz
+	From:    Bodman-Ludwigshafen, Baden-Wuerttemberg, Germany
+
+	Role:    Chief of the blog, blog articles
+	Name:    Jose Antonio
+	Contact: joseagonzalezt [at] linux.com
+	Twitter: @joseagonzalezt
+	From:    Chile
+
+/* THANKS */
+
+	Nothing here yet, since Alex has done everything alone until now.
+
+/* SITE */
+
+	Last update: 2015/05/11
+	Doctype:HTML5
+	IDE: PHPStorm

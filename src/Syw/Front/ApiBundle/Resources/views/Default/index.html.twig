@@ -1,0 +1,941 @@
+{% extends "SywFrontApiBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_api_default_index" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'Machine management'|trans }}</h3>
+                    </div>
+                    <div id="apidoc" class="panel-body apidoc">
+                        <div class="apidoccontent">
+
+
+
+                            <div id="apidoc1" class="apidocbox">
+                                <div class="row apidoctitle">
+                                    <div class="col-sm-2 apimethod post">POST</div>
+                                    <div class="col-sm-10 api-action">
+                                        {{ 'Create a new, empty machine in your linuxcounter account'|trans }}
+                                    </div>
+                                </div>
+                                <div id="apidoc_desc1" class="apidocdesc">
+                                    <div class="apidocdesc_div">
+                                        <div class="example example-request">
+                                            <span class="label">POST</span> {{ apihost }}/v1/machines
+                                        </div>
+                                        <pre><code>curl --request POST \
+    '{{ apihost }}/v1/machines' \
+    --header 'x-lico-apikey: {{ 'YOUR-APIKEY-HERE'|trans }}'
+</code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="3">{{ 'Request Parameters'|trans }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><code>x-lico-apikey</code></td>
+                                                    <td>Header</td>
+                                                    <td><desc><strong>*</strong> {{ 'Submit your ApiKey through the request header.'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <div class="example example-response"></div>
+                                        <pre><code>{
+    'machine_id': 12345,
+    'machine_updatekey': 'tz3948vtz349gnh4308t34058zt34z5h'
+}
+</code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="2">{{ 'Response Status Codes'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>201 Created</code></td>
+                                                <td><desc>{{ 'The machine got successfully created'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>400 Bad Request</code></td>
+                                                <td><desc>{{ 'No Apikey or wrong Apikey provided'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>404 Not Found</code></td>
+                                                <td><desc>{{ 'The ApiKey was not found'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>500 Internal Server Error</code></td>
+                                                <td><desc>{{ 'There was an internal error. Please contact the admin.'|trans }}</desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div id="apidoc2" class="apidocbox">
+                                <div class="row apidoctitle">
+                                    <div class="col-sm-2 apimethod patch">PATCH</div>
+                                    <div class="col-sm-10 api-action">
+                                        {{ 'Update a machine with some data'|trans }}
+                                    </div>
+                                </div>
+                                <div id="apidoc_desc2" class="apidocdesc">
+                                    <div class="apidocdesc_div">
+                                        <div class="example example-request">
+                                            <span class="label">PATCH</span> {{ apihost }}/v1/machines/{machine_id}
+                                        </div>
+                                        <pre><code>curl --request PATCH \
+    '{{ apihost }}/v1/machines/YOUR-MACHINE-ID-HERE' \
+    --header 'x-lico-machine-updatekey: {{ 'YOUR-MACHINE-UPDATEKEY-HERE'|trans }}' \
+    --data 'hostname=some.example.com' \
+    --data 'distribution=Trisquel' \
+    --data 'distversion=7.0 LTS Belenos'
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="3">{{ 'Request Parameters'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>machine_id</code></td>
+                                                <td>Query URL</td>
+                                                <td><desc><strong>*</strong> {{ 'Use the machine_id from the Creation above.'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>x-lico-machine-updatekey</code></td>
+                                                <td>Header</td>
+                                                <td><desc><strong>*</strong> {{ 'Use the machine_updatekey from the Creation above.'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>--data</code></td>
+                                                <td>Body</td>
+                                                <td><desc><strong>*</strong> {{ 'All keys are optional, but at least one "key=value" entry is required'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="3">{{ '--data key Parameters'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>hostname</code></td>
+                                                <td>String</td>
+                                                <td><desc>{{ 'The hostname of your machine'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>cores</code></td>
+                                                <td>Integer</td>
+                                                <td><desc>{{ 'The number of CPU cores'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>flags</code></td>
+                                                <td>String</td>
+                                                <td><desc>{{ 'The flags of the CPU(s)'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>accounts</code></td>
+                                                <td>Integer</td>
+                                                <td><desc>{{ 'The number of accounts on your machine'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>diskspace</code></td>
+                                                <td>Integer</td>
+                                                <td><desc>{{ 'The diskspace in megabytes'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>diskspaceFree</code></td>
+                                                <td>Integer</td>
+                                                <td><desc>{{ 'The free diskspace in kilobytes'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>memory</code></td>
+                                                <td>Integer</td>
+                                                <td><desc>{{ 'The memory (RAM) in megabytes'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>memoryFree</code></td>
+                                                <td>Integer</td>
+                                                <td><desc>{{ 'The free memory (RAM) in kilobytes'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>swap</code></td>
+                                                <td>Integer</td>
+                                                <td><desc>{{ 'The swap space in megabytes'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>swapFree</code></td>
+                                                <td>Integer</td>
+                                                <td><desc>{{ 'The free swap space in kilobytes'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>distversion</code></td>
+                                                <td>String</td>
+                                                <td><desc>{{ 'The versionstring of the distribution'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>mailer</code></td>
+                                                <td>String</td>
+                                                <td><desc>{{ 'What program is used to send emails'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>network</code></td>
+                                                <td>String</td>
+                                                <td><desc>{{ 'How is it connected to the internet'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>online</code></td>
+                                                <td>Integer</td>
+                                                <td><desc>{{ 'is the machine online (1) or offline (0)'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>uptime</code></td>
+                                                <td>String</td>
+                                                <td><desc>{{ 'The uptime of the machine in seconds(!)'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>loadavg</code></td>
+                                                <td>String</td>
+                                                <td><desc>{{ 'The Load average string (e.g. "0,23 0,54 0,45")'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>distribution</code></td>
+                                                <td>String</td>
+                                                <td><desc>{{ 'The name of the distribution (without version!)'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>kernel</code></td>
+                                                <td>String</td>
+                                                <td><desc>{{ 'The kernel version string (e.g. "3.13.44-2")'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>cpu</code></td>
+                                                <td>String</td>
+                                                <td><desc>{{ 'The name (model) of the CPU (from e.g. /proc/cpuinfo)'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>country</code></td>
+                                                <td>String</td>
+                                                <td><desc>{{ 'The ISO country code (e.g. "DE" or "US")'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>architecture</code></td>
+                                                <td>String</td>
+                                                <td><desc>{{ 'The arch of your machine (e.g. "armv7" or "x86_64")'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>class</code></td>
+                                                <td>String</td>
+                                                <td><desc>{{ 'The class of the machine (e.g. "server", "laptop" or "workstation")'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>purpose</code></td>
+                                                <td>String</td>
+                                                <td><desc>{{ 'For what is this machine used for (e.g. "work", "home", "school", ...)'|trans }}</desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <div class="example example-response padding">
+                                            {{ 'There will be an empty response with status code "204 No Content"'|trans }}
+                                        </div>
+                                        <pre><code></code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="2">{{ 'Response Status Codes'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>204 No Content</code></td>
+                                                <td><desc>{{ 'The machine got successfully updated'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>400 Bad Request</code></td>
+                                                <td><desc>{{ 'The was something wrong with the request (maybe wrong --data parameter?)'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>404 Not Found</code></td>
+                                                <td><desc>{{ 'The machine_id or the machine_updatekey were not found'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>500 Internal Server Error</code></td>
+                                                <td><desc>{{ 'There was an internal error. Please contact the admin.'|trans }}</desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div id="apidoc3" class="apidocbox">
+                                <div class="row apidoctitle">
+                                    <div class="col-sm-2 apimethod get">GET</div>
+                                    <div class="col-sm-10 api-action">
+                                        {{ 'Get the list of all of your machines of your account'|trans }}
+                                    </div>
+                                </div>
+                                <div id="apidoc_desc3" class="apidocdesc">
+                                    <div class="apidocdesc_div">
+                                        <div class="example example-request">
+                                            <span class="label">GET</span> {{ apihost }}/v1/machines
+                                        </div>
+                                        <pre><code>curl --request GET \
+    '{{ apihost }}/v1/machines' \
+    --header 'x-lico-apikey: {{ 'YOUR-APIKEY-HERE'|trans }}'
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="3">{{ 'Request Parameters'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>x-lico-apikey</code></td>
+                                                <td>Header</td>
+                                                <td><desc><strong>*</strong> {{ 'Submit your ApiKey through the request header.'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <div class="example example-response"></div>
+                                        <pre><code>{
+    'machine_id': 12345,
+    'machine_updatekey': 'tz3948vtz349gnh4308t34058zt34z5h',
+    'createdat': 2015-04-10 08:56:31,
+    'modifiedat': 2015-04-10 08:56:31
+},
+{
+    'machine_id': 234567,
+    'machine_updatekey': 'uiw4z5t87w3tzo3tzw3tzwp345t4w5us',
+    'createdat': 2015-04-11 08:56:31,
+    'modifiedat': 2015-04-11 16:56:31
+},
+{
+    'machine_id': 321432,
+    'machine_updatekey': 'bev897twz3ot834zt37nztnw3o874tds',
+    'createdat': 2015-04-12 08:56:31,
+    'modifiedat': 2015-04-12 18:56:31
+}
+</code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="2">{{ 'Response Status Codes'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>200 Ok</code></td>
+                                                <td><desc>{{ 'The list of your machines get returned'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>404 Not Found</code></td>
+                                                <td><desc>{{ 'The ApiKey was not found'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>500 Internal Server Error</code></td>
+                                                <td><desc>{{ 'There was an internal error. Please contact the admin.'|trans }}</desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div id="apidoc4" class="apidocbox">
+                                <div class="row apidoctitle">
+                                    <div class="col-sm-2 apimethod get">GET</div>
+                                    <div class="col-sm-10 api-action">
+                                        {{ 'Get the details of one machine of your account'|trans }}
+                                    </div>
+                                </div>
+                                <div id="apidoc_desc4" class="apidocdesc">
+                                    <div class="apidocdesc_div">
+                                        <div class="example example-request">
+                                            <span class="label">GET</span> {{ apihost }}/v1/machines/{machine_id}
+                                        </div>
+                                        <pre><code>curl --request GET \
+    '{{ apihost }}/v1/machines/{machine_id}' \
+    --header 'x-lico-apikey: {{ 'YOUR-APIKEY-HERE'|trans }}'
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="3">{{ 'Request Parameters'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>machine_id</code></td>
+                                                <td>Query URL</td>
+                                                <td><desc><strong>*</strong> {{ 'Use the machine_id from the Creation above.'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>x-lico-apikey</code></td>
+                                                <td>Header</td>
+                                                <td><desc><strong>*</strong> {{ 'Submit your ApiKey through the request header.'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <div class="example example-response"></div>
+                                        <pre><code>{
+    "machine_id": 2009882,
+    "machine_updatekey": "xxxxxxxxx",
+    "machine_user": 249600,
+    "machine_hostname": "linuxcounter.net",
+    "machine_cores": 12,
+    "machine_flags": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq d",
+    "machine_accounts": 31,
+    "machine_diskspace": "221322",
+    "machine_diskspaceFree": "145081",
+    "machine_memory": "48271",
+    "machine_memoryFree": "3383",
+    "machine_swap": "3812",
+    "machine_swapFree": "3068",
+    "machine_distversion": "14.04",
+    "machine_mailer": "Postfix",
+    "machine_network": "ethernet",
+    "machine_online": true,
+    "machine_uptime": 1555200,
+    "machine_loadavg": "2.45, 2.19, 2.17",
+    "machine_distribution": "Ubuntu",
+    "machine_kernel": "3.13.0-45-generic",
+    "machine_cpu": "Intel(R) Xeon(R) CPU E5-1650 v2",
+    "machine_country": "DE",
+    "machine_architecture": "x86_64",
+    "machine_class": "server",
+    "machine_purpose": null,
+    "machine_createdat": {
+        "date": "2014-12-17 17:22:53",
+        "timezone_type": 3,
+        "timezone": "Europe\/Berlin"
+    },
+    "machine_modifiedat": {
+        "date": "2015-03-09 05:00:02",
+        "timezone_type": 3,
+        "timezone": "Europe\/Berlin"
+    }
+}
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="2">{{ 'Response Status Codes'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>200 Ok</code></td>
+                                                <td><desc>{{ 'The details of your machine get returned'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>404 Not Found</code></td>
+                                                <td><desc>{{ 'The ApiKey was not found'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>500 Internal Server Error</code></td>
+                                                <td><desc>{{ 'There was an internal error. Please contact the admin.'|trans }}</desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div id="apidoc5" class="apidocbox">
+                                <div class="row apidoctitle">
+                                    <div class="col-sm-2 apimethod delete">DELETE</div>
+                                    <div class="col-sm-10 api-action">
+                                        {{ 'Delete one machine from your account'|trans }}
+                                    </div>
+                                </div>
+                                <div id="apidoc_desc5" class="apidocdesc">
+                                    <div class="apidocdesc_div">
+                                        <div class="example example-request">
+                                            <span class="label">DELETE</span> {{ apihost }}/v1/machines/{machine_id}
+                                        </div>
+                                        <pre><code>curl --request DELETE \
+    '{{ apihost }}/v1/machines/{machine_id}' \
+    --header 'x-lico-apikey: {{ 'YOUR-APIKEY-HERE'|trans }}'
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="3">{{ 'Request Parameters'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>machine_id</code></td>
+                                                <td>Query URL</td>
+                                                <td><desc><strong>*</strong> {{ 'Use the machine_id from the Creation above.'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>x-lico-apikey</code></td>
+                                                <td>Header</td>
+                                                <td><desc><strong>*</strong> {{ 'Submit your ApiKey through the request header.'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                        <div class="example example-response padding">
+                                            {{ 'There will be an empty response with status code "204 No Content"'|trans }}
+                                        </div>
+                                        <pre><code></code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="2">{{ 'Response Status Codes'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>204 No Content</code></td>
+                                                <td><desc>{{ 'The machine got successfully deleted'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>404 Not Found</code></td>
+                                                <td><desc>{{ 'The machine_id or the machine_updatekey were not found'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>500 Internal Server Error</code></td>
+                                                <td><desc>{{ 'There was an internal error. Please contact the admin.'|trans }}</desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'Get Statistics'|trans }}</h3>
+                    </div>
+                    <div id="apidoc" class="panel-body apidoc">
+                        <div class="apidoccontent">
+
+                            <div id="apidoc6" class="apidocbox">
+                                <div class="row apidoctitle">
+                                    <div class="col-sm-2 apimethod get">GET</div>
+                                    <div class="col-sm-10 api-action">
+                                        {{ 'Get the user statistics'|trans }}
+                                    </div>
+                                </div>
+                                <div id="apidoc_desc6" class="apidocdesc">
+                                    <div class="apidocdesc_div">
+                                        <div class="example example-request">
+                                            <span class="label">GET</span> {{ apihost }}/v1/statistics/user/{page}
+                                        </div>
+                                        <pre><code>curl --request GET \
+    '{{ apihost }}/v1/statistics/user/2' \
+    --header 'x-lico-apikey: {{ 'YOUR-APIKEY-HERE'|trans }}'
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="3">{{ 'Request Parameters'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>x-lico-apikey</code></td>
+                                                <td>Header</td>
+                                                <td><desc><strong>*</strong> {{ 'Submit your ApiKey through the request header.'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>page</code></td>
+                                                <td>Query</td>
+                                                <td><desc><strong>*</strong> {{ 'The results are limited to pages'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <div class="example example-response"></div>
+                                        <pre><code>{
+    [ not thought of this yet ]
+}
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="2">{{ 'Response Status Codes'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>200 Ok</code></td>
+                                                <td><desc>{{ 'The statistics get returned'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>404 Not Found</code></td>
+                                                <td><desc>{{ 'The ApiKey was not found'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>500 Internal Server Error</code></td>
+                                                <td><desc>{{ 'There was an internal error. Please contact the admin.'|trans }}</desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div id="apidoc7" class="apidocbox">
+                                <div class="row apidoctitle">
+                                    <div class="col-sm-2 apimethod get">GET</div>
+                                    <div class="col-sm-10 api-action">
+                                        {{ 'Get the machine statistics'|trans }}
+                                    </div>
+                                </div>
+                                <div id="apidoc_desc7" class="apidocdesc">
+                                    <div class="apidocdesc_div">
+                                        <div class="example example-request">
+                                            <span class="label">GET</span> {{ apihost }}/v1/statistics/machines
+                                        </div>
+                                        <pre><code>curl --request GET \
+    '{{ apihost }}/v1/statistics/machines
+    --header 'x-lico-apikey: {{ 'YOUR-APIKEY-HERE'|trans }}'
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="3">{{ 'Request Parameters'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>x-lico-apikey</code></td>
+                                                <td>Header</td>
+                                                <td><desc><strong>*</strong> {{ 'Submit your ApiKey through the request header.'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="example example-response"></div>
+                                        <pre><code>{
+    [ not thought of this yet ]
+}
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="2">{{ 'Response Status Codes'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>200 Ok</code></td>
+                                                <td><desc>{{ 'The statistics get returned'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>404 Not Found</code></td>
+                                                <td><desc>{{ 'The ApiKey was not found'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>500 Internal Server Error</code></td>
+                                                <td><desc>{{ 'There was an internal error. Please contact the admin.'|trans }}</desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div id="apidoc8" class="apidocbox">
+                                <div class="row apidoctitle">
+                                    <div class="col-sm-2 apimethod get">GET</div>
+                                    <div class="col-sm-10 api-action">
+                                        {{ 'Get the distribution statistics'|trans }}
+                                    </div>
+                                </div>
+                                <div id="apidoc_desc8" class="apidocdesc">
+                                    <div class="apidocdesc_div">
+                                        <div class="example example-request">
+                                            <span class="label">GET</span> {{ apihost }}/v1/statistics/distributions
+                                        </div>
+                                        <pre><code>curl --request GET \
+    '{{ apihost }}/v1/statistics/distributions'
+    --header 'x-lico-apikey: {{ 'YOUR-APIKEY-HERE'|trans }}'
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="3">{{ 'Request Parameters'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>x-lico-apikey</code></td>
+                                                <td>Header</td>
+                                                <td><desc><strong>*</strong> {{ 'Submit your ApiKey through the request header.'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="example example-response"></div>
+                                        <pre><code>{
+    [ not thought of this yet ]
+}
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="2">{{ 'Response Status Codes'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>200 Ok</code></td>
+                                                <td><desc>{{ 'The statistics get returned'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>404 Not Found</code></td>
+                                                <td><desc>{{ 'The ApiKey was not found'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>500 Internal Server Error</code></td>
+                                                <td><desc>{{ 'There was an internal error. Please contact the admin.'|trans }}</desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div id="apidoc9" class="apidocbox">
+                                <div class="row apidoctitle">
+                                    <div class="col-sm-2 apimethod get">GET</div>
+                                    <div class="col-sm-10 api-action">
+                                        {{ 'Get the kernel statistics'|trans }}
+                                    </div>
+                                </div>
+                                <div id="apidoc_desc9" class="apidocdesc">
+                                    <div class="apidocdesc_div">
+                                        <div class="example example-request">
+                                            <span class="label">GET</span> {{ apihost }}/v1/statistics/kernels
+                                        </div>
+                                        <pre><code>curl --request GET \
+    '{{ apihost }}/v1/statistics/kernels'
+    --header 'x-lico-apikey: {{ 'YOUR-APIKEY-HERE'|trans }}'
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="3">{{ 'Request Parameters'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>x-lico-apikey</code></td>
+                                                <td>Header</td>
+                                                <td><desc><strong>*</strong> {{ 'Submit your ApiKey through the request header.'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="example example-response"></div>
+                                        <pre><code>{
+    [ not thought of this yet ]
+}
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="2">{{ 'Response Status Codes'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>200 Ok</code></td>
+                                                <td><desc>{{ 'The statistics get returned'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>404 Not Found</code></td>
+                                                <td><desc>{{ 'The ApiKey was not found'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>500 Internal Server Error</code></td>
+                                                <td><desc>{{ 'There was an internal error. Please contact the admin.'|trans }}</desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div id="apidoc10" class="apidocbox">
+                                <div class="row apidoctitle">
+                                    <div class="col-sm-2 apimethod get">GET</div>
+                                    <div class="col-sm-10 api-action">
+                                        {{ 'Get the uptime statistics'|trans }}
+                                    </div>
+                                </div>
+                                <div id="apidoc_desc10" class="apidocdesc">
+                                    <div class="apidocdesc_div">
+                                        <div class="example example-request">
+                                            <span class="label">GET</span> {{ apihost }}/v1/statistics/uptimes
+                                        </div>
+                                        <pre><code>curl --request GET \
+    '{{ apihost }}/v1/statistics/uptimes'
+    --header 'x-lico-apikey: {{ 'YOUR-APIKEY-HERE'|trans }}'
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="3">{{ 'Request Parameters'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>x-lico-apikey</code></td>
+                                                <td>Header</td>
+                                                <td><desc><strong>*</strong> {{ 'Submit your ApiKey through the request header.'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="example example-response"></div>
+                                        <pre><code>{
+    [ not thought of this yet ]
+}
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="2">{{ 'Response Status Codes'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>200 Ok</code></td>
+                                                <td><desc>{{ 'The statistics get returned'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>404 Not Found</code></td>
+                                                <td><desc>{{ 'The ApiKey was not found'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>500 Internal Server Error</code></td>
+                                                <td><desc>{{ 'There was an internal error. Please contact the admin.'|trans }}</desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div id="apidoc11" class="apidocbox">
+                                <div class="row apidoctitle">
+                                    <div class="col-sm-2 apimethod get">GET</div>
+                                    <div class="col-sm-10 api-action">
+                                        {{ 'Get the counter statistics'|trans }}
+                                    </div>
+                                </div>
+                                <div id="apidoc_desc11" class="apidocdesc">
+                                    <div class="apidocdesc_div">
+                                        <div class="example example-request">
+                                            <span class="label">GET</span> {{ apihost }}/v1/statistics/counter
+                                        </div>
+                                        <pre><code>curl --request GET \
+    '{{ apihost }}/v1/statistics/counter'
+    --header 'x-lico-apikey: {{ 'YOUR-APIKEY-HERE'|trans }}'
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="3">{{ 'Request Parameters'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>x-lico-apikey</code></td>
+                                                <td>Header</td>
+                                                <td><desc><strong>*</strong> {{ 'Submit your ApiKey through the request header.'|trans }} <span class="muted">({{ 'Required'|trans }})</span></desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="example example-response"></div>
+                                        <pre><code>{
+    [ not thought of this yet ]
+}
+                                            </code></pre>
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="2">{{ 'Response Status Codes'|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><code>200 Ok</code></td>
+                                                <td><desc>{{ 'The statistics get returned'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>404 Not Found</code></td>
+                                                <td><desc>{{ 'The ApiKey was not found'|trans }}</desc></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>500 Internal Server Error</code></td>
+                                                <td><desc>{{ 'There was an internal error. Please contact the admin.'|trans }}</desc></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

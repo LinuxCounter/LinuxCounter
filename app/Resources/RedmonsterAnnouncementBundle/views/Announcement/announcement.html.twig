@@ -1,0 +1,12 @@
+{% if current_announcement and announcement_hidden(current_announcement) == false %}
+<div id="announcement">
+    <div class="wrapper modal fade in">
+        <div class="modal-dialog">
+            <div class="modal-content alert-dismissible alert-info" role="alert">
+                <button id="hide_announcement" data-announcement="{{ announcement_cookie(current_announcement) }}" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <span>{{ current_announcement.body|raw }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

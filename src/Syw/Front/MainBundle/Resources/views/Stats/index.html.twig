@@ -1,0 +1,52 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_main_stats_index" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ title1 }}</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <p>{{ 'The intention of this project is to determine, how many Linux users there are in the world. This is not that simple as it seems to be.'|trans }}</p>
+                        <p> &nbsp; </p>
+                        <p>{{ 'It is VERY hard to get any real idea of the size of the Linux community.'|trans }}</p>
+                        <p>{{ "In a sense, it is because we want it that way: we do NOT want anything like centralized control, and that means that we don't want anyone to say authoritatively how many people we are, either."|trans }}</p>
+                        <p>{{ 'The only number we can be sure of is "many".'|trans }}</p>
+                        <p>{{ 'The lower limit is something like what is counted in the Linux Counter, but even this is not certain; people may have stopped using Linux after registering, or may be registered under 2 different emails.'|trans }}</p>
+                        <p> &nbsp; </p>
+                        <p>{{ 'The Linux Counter also has several built in drawbacks:'|trans }}</p>
+                        <ul>
+                            <li> {{ 'Only peoples who run across mention of it on Linux enthusiast web pages are likely to hear about it, although several important Linux documents also mention it'|trans }} </li>
+                            <li> {{ 'Only peoples with E-mail or Web access can register with it'|trans }} </li>
+                            <li> {{ 'Accounts of people who forget to re-visit the website are deleted after two years.'|trans }}</li>
+                            <li> {{ 'And most importantly: Only people who *care* to be registered can be counted.'|trans }}  </li>
+                        </ul>
+                        <p>{{ 'This all makes it hard to make any guess about the number of Linux users worldwide.'|trans }}</p>
+                        <p> &nbsp; </p>
+                        <p>{{ 'But there are several known numbers we can play with. These numbers were researched and collected together from many different websites:'|trans }}</p>
+                        <ul>
+                            <li> {{ 'In this second, we have <span class="worldpop">%stats.guess.world_population%</span> peoples on earth. (See for example: <a href="http://www.worldometers.info/">http://www.worldometers.info/</a>)'|trans({
+                                    '%stats.guess.world_population%': stats.guess.world_population|number_format
+                                })|raw }}</li>
+                            <li> {{ 'Actually we have a statistical number of <span class="internetpop">%stats.guess.world_internet_users%</span> internet users worldwide.'|trans({
+                                    '%stats.guess.world_internet_users%': stats.guess.world_internet_users|number_format
+                                })|raw }}</li>
+                            <li> {{ 'The average of Linux users of all internet users seems to be at about 2.66 %. (Measured from the web statistics of many great pages)'|trans }}</li>
+                            <li> {{ 'The Presumption that there are about 0,7% of all Linux users registered in our Linux counter.'|trans }}</li>
+                            <li> {{ 'Bringing this all together gives us a very conservative guess of Linux users that have access to the internet (should be at least 99% of all Linux users).'|trans }} </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            {{ include('SywFrontMainBundle:Common:_guess.html.twig') }}
+            {{ include('SywFrontMainBundle:Common:_stats_links.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

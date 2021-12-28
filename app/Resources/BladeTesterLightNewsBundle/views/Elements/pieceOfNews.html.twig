@@ -1,0 +1,22 @@
+{% trans_default_domain "news_homepage" %}
+<div class="panel panel-default pieceOfNews">
+    <div class="panel-heading">
+        <a href="{% if pieceOfNews.link %}{{ pieceOfNews.link }}{% else %}{{ url('news_view', {'id': pieceOfNews.getId()}) }}{% endif %}"><h3 class="panel-title newsTitle">[{{ pieceOfNews.createdAt|date('Y-m-d H:i') }}]  {{ pieceOfNews.title }}</h3></a>
+    </div>
+    <div class="panel-body newsBody">
+        <div class="col-sm-12">
+            {{ pieceOfNews.body|striptags|length > 400 ? pieceOfNews.body|striptags|truncate(400, '...')|raw : pieceOfNews.body|striptags|raw }}
+        </div>
+        <div class="col-sm-12">
+            <hr size="1" noshade="noshade"/>
+        </div>
+        <div class="col-sm-6">
+            <a href="{% if pieceOfNews.link %}{{ pieceOfNews.link }}{% else %}{{ url('news_view', {'id': pieceOfNews.getId()}) }}{% endif %}">{{ pieceOfNews.createdAt|date('Y-m-d H:i') }}</a>
+        </div>
+        <div class="col-sm-6">
+            <span style="display: block;text-align:right">
+                <a href="{% if pieceOfNews.link %}{{ pieceOfNews.link }}{% else %}{{ url('news_view', {'id': pieceOfNews.getId()}) }}{% endif %}">{{ 'Read more...'|trans }}</a>
+            </span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+{
+  "name": "alex/symfony",
+  "license": "proprietary",
+  "type": "project",
+  "autoload": {
+    "psr-0": {
+      "": "src/",
+      "SymfonyStandard": "app/"
+    }
+  },
+  "require": {
+    "php": ">=5.4.0",
+    "vitre/php-console-bundle": "dev-master",
+    "symfony/symfony": "2.7.*",
+    "doctrine/orm": "~2.2,>=2.2.3,<2.5",
+    "doctrine/dbal": "<2.5",
+    "doctrine/doctrine-bundle": "dev-master",
+    "doctrine/migrations": "dev-master",
+    "doctrine/doctrine-migrations-bundle": "dev-master",
+    "twig/extensions": "dev-master",
+    "jasny/twig-extensions": "dev-master",
+    "symfony/assetic-bundle": "dev-master",
+    "symfony/swiftmailer-bundle": "dev-master",
+    "symfony/monolog-bundle": "dev-master",
+    "sensio/distribution-bundle": "~3.0",
+    "sensio/framework-extra-bundle": "dev-master",
+    "incenteev/composer-parameter-handler": "dev-master",
+    "knplabs/knp-menu-bundle": "dev-master",
+    "knplabs/knp-paginator-bundle": "dev-master",
+    "knplabs/knp-menu": "dev-master",
+    "friendsofsymfony/user-bundle": "dev-master",
+    "asm/translation-loader-bundle": "dev-master",
+    "javiereguiluz/easyadmin-bundle": "1.5.*",
+    "ornicar/gravatar-bundle": "dev-master",
+    "mopa/bootstrap-bundle": "dev-master",
+    "twbs/bootstrap": "dev-master",
+    "shtumi/useful-bundle": "dev-master",
+    "propaganistas/twig-emailobfuscator": "dev-master",
+    "friendsofsymfony/rest-bundle": "dev-master",
+    "jms/serializer-bundle": "dev-master",
+    "ob/highcharts-bundle": "dev-master",
+    "whisller/irc-bot-bundle": "dev-master",
+    "carlescliment/light-news-bundle": "dev-master",
+    "redmonster/announcement-bundle": "dev-master",
+    "nostalgiaz/bootstrap-switch": "dev-master",
+    "abraham/twitteroauth": "dev-master",
+    "eko/feedbundle": "dev-master",
+    "salavert/time-ago-in-words": "1.*",
+    "excelwebzone/recaptcha-bundle": "dev-master",
+    "aequasi/cache-bundle": "dev-master"
+  },
+  "require-dev": {
+    "sensio/generator-bundle": "dev-master",
+    "satooshi/php-coveralls": "dev-master"
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "SymfonyStandard\\Composer::hookRootPackageInstall"
+    ],
+    "post-install-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+      "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+    ],
+    "post-update-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+      "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+    ]
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "extra": {
+    "symfony-app-dir": "app",
+    "symfony-web-dir": "web",
+    "symfony-assets-install": "relative",
+    "incenteev-parameters": {
+      "file": "app/config/parameters.yml"
+    },
+    "branch-alias": {
+        "dev-master": "2.8-dev"
+    }
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/nostalgiaz/bootstrap-switch"
+    }
+  ]
+}

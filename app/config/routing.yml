@@ -1,0 +1,49 @@
+manager:
+    resource: "@ManagerBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    host:     %base_host%
+    schemes:  [https]
+
+syw_front_main:
+    resource: "@SywFrontMainBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    host:     %base_host%
+    schemes:  [https]
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    host:     %base_host%
+    schemes:  [https]
+
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
+    host:     %base_host%
+    schemes:  [https]
+
+shtumi_useful:
+    resource: '@ShtumiUsefulBundle/Resources/config/routing.xml'
+    host:     %base_host%
+    schemes:  [https]
+
+blade_tester_light_news_bundle:
+    resource: "@BladeTesterLightNewsBundle/Resources/config/routing.yml"
+    prefix:   /news
+    host:     %base_host%
+    schemes:  [https]
+
+tool_box:
+    resource: "@ToolBoxBundle/Controller/"
+    type:     annotation
+    prefix:   /toolbox
+    host:     %base_host%
+    schemes:  [https]
+
+syw_front_api:
+    resource: "@SywFrontApiBundle/Controller/"
+    type:     annotation
+    host:     %api_host%
+    schemes:  [http]

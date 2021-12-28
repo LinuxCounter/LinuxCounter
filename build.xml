@@ -1,0 +1,166 @@
+<project name="Test" default="build" basedir=".">
+    <property name="output" location="${basedir}/build"/>
+    <property name="testdir" location="${basedir}/src/Syw/Front"/>
+
+    <target name="build" depends="clean, prepare, paralleltasks, phpunit, apigen, phpdox, phpcb"></target>
+
+    <!-- this works -->
+    <target name="clean" unless="clean.done" description="Cleanup build artifacts">
+        <delete dir="${output}"/>
+        <property name="clean.done" value="true"/>
+    </target>
+
+    <!-- this works -->
+    <target name="prepare" depends="clean" unless="prepare.done" description="Prepare for build">
+        <mkdir dir="${output}"/>
+        <mkdir dir="${output}/apigen"/>
+        <mkdir dir="${output}/phpdox"/>
+        <mkdir dir="${output}/code-browser"/>
+        <mkdir dir="${output}/coverage"/>
+        <mkdir dir="${output}/logs"/>
+        <mkdir dir="${output}/pdepend"/>
+        <property name="prepare.done" value="true"/>
+    </target>
+
+    <target name="paralleltasks" depends="prepare" description="Run the tasks in parallel using a maximum of 2 threads.">
+        <parallel threadCount="2">
+            <antcall target="lint"/>
+            <antcall target="pdepend"/>
+            <antcall target="phpmd"/>
+            <antcall target="phpcpd"/>
+            <antcall target="phpcs"/>
+            <antcall target="phploc"/>
+        </parallel>
+    </target>
+
+    <!-- this works -->
+    <target name="lint" unless="lint.done" description="Perform syntax check of sourcecode files">
+        <apply executable="php" failonerror="true">
+            <arg value="-l" />
+            <fileset dir="${testdir}">
+                <include name="**/*.php" />
+                <modified />
+            </fileset>
+        </apply>
+        <property name="lint.done" value="true"/>
+    </target>
+
+    <!-- this works -->
+    <target name="phploc" unless="phploc.done" description="Measure project size using PHPLOC">
+        <exec executable="phploc" output="/dev/null">
+            <arg value="--exclude" />
+            <arg path="${testdir}/Tests" />
+            <arg value="--exclude" />
+            <arg path="${testdir}/*/Tests" />
+            <arg value="--exclude" />
+            <arg path="${testdir}/*/*/Tests" />
+            <arg value="--log-csv" />
+            <arg value="${output}/logs/phploc.csv" />
+            <arg path="${testdir}" />
+        </exec>
+        <property name="phploc.done" value="true"/>
+    </target>
+
+    <!-- this works -->
+    <target name="pdepend" unless="pdepend.done" description="Calculate software metrics using PHP_Depend">
+        <exec executable="pdepend" output="/dev/null">
+            <arg value="--jdepend-xml=${output}/logs/jdepend.xml" />
+            <arg value="--jdepend-chart=${output}/pdepend/dependencies.svg" />
+            <arg value="--overview-pyramid=${output}/pdepend/overview-pyramid.svg" />
+            <arg path="${testdir}" />
+        </exec>
+        <property name="pdepend.done" value="true"/>
+    </target>
+
+    <!-- this works -->
+    <target name="phpmd" unless="phpmd.done" description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
+        <exec executable="phpmd" output="/dev/null">
+            <arg path="${testdir}/" />
+            <arg value="xml" />
+            <arg value="codesize,unusedcode,naming,design" />
+            <arg value="--reportfile" />
+            <arg value="${output}/logs/pmd.xml" />
+            <arg value="--exclude" />
+            <arg path="Tests" />
+        </exec>
+        <property name="phpmd.done" value="true"/>
+    </target>
+
+    <!-- this works -->
+    <target name="phpcs" unless="phpcs.done"
+            description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
+        <exec executable="phpcs" output="/dev/null">
+            <arg value="--report=checkstyle" />
+            <arg value="--report-file=${output}/logs/checkstyle.xml" />
+            <arg value="--standard=psr2" />
+            <arg value="--ignore=Tests" />
+            <arg value="--ignore=autoload.php" />
+            <arg value="--extensions=php" />
+            <arg path="${testdir}" />
+        </exec>
+        <property name="phpcs.done" value="true"/>
+    </target>
+
+    <!-- this works -->
+    <target name="phpcpd" unless="phpcpd.done" description="Find duplicate code using PHPCPD">
+        <exec executable="phpcpd" output="/dev/null">
+            <arg value="--log-pmd" />
+            <arg value="${output}/logs/pmd-cpd.xml" />
+            <arg value="--exclude" />
+            <arg path="${testdir}/Tests" />
+            <arg value="--exclude" />
+            <arg path="${testdir}/*/Tests" />
+            <arg value="--exclude" />
+            <arg path="${testdir}/*/*/Tests" />
+            <arg path="${testdir}" />
+        </exec>
+        <property name="phpcpd.done" value="true"/>
+    </target>
+
+    <!-- this DOESNT work! -->
+    <target name="apigen" unless="apigen.done" description="Generate API documentation using apigen 2">
+        <exec executable="apigen" output="/dev/null">
+            <arg value="--source" />
+            <arg value="${testdir}" />
+            <arg value="--destination" />
+            <arg value="${output}/apigen" />
+        </exec>
+        <property name="apigen.done" value="true"/>
+    </target>
+
+    <!-- this works -->
+    <target name="phpunit" unless="phpunit.done" description="Run unit tests with PHPUnit">
+        <exec executable="phpunit" failonerror="false" output="/dev/null">
+            <arg line="--coverage-clover ${output}/coverage/clover.xml
+				--coverage-html ${output}/coverage/
+				-c app"/>
+        </exec>
+        <property name="phpunit.done" value="true"/>
+    </target>
+
+    <target name="phpdox"
+            unless="phpdox.done"
+            depends="phploc,phpcs,phpmd"
+            description="Generate project documentation using phpDox">
+        <exec executable="phpdox" dir="${output}/phpdox" taskname="phpdox" output="/dev/null">
+            <arg value="--file" />
+            <arg value="${basedir}/phpdox.xml" />
+        </exec>
+        <property name="phpdox.done" value="true"/>
+    </target>
+
+    <target name="phpcb" unless="phpcb.done" description="Aggregate tool output with PHP_CodeBrowser">
+        <exec executable="phpcb" output="/dev/null">
+            <arg value="--log" />
+            <arg path="${output}/logs" />
+            <arg value="--ignore" />
+            <arg path="Tests" />
+            <arg value="--source" />
+            <arg path="${testdir}" />
+            <arg value="--output" />
+            <arg path="${output}/code-browser" />
+        </exec>
+        <property name="phpcb.done" value="true"/>
+    </target>
+
+</project>

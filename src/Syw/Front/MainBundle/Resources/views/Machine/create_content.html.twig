@@ -1,0 +1,32 @@
+{% trans_default_domain "syw_front_main_machine_create" %}
+
+<div class="col-sm-12">
+    <form action="{{ url('syw_front_main_machine_create') }}" {{ form_enctype(form) }}
+          method="POST" class="fos_user_profile_edit">
+        {{ form_row(form.hostname) }}
+        {{ form_row(form.country, { 'attr': {'placeholder': 'Search for the country by typing the name...'|trans} }) }}
+        {{ form_row(form.online) }}
+        {{ form_row(form.class, { 'attr': {'placeholder': 'Search for the class by typing the name...'|trans} }) }}
+        {{ form_row(form.distribution, { 'attr': {'placeholder': 'Search for the distribution by typing the name...'|trans} }) }}
+        {{ form_row(form.distversion) }}
+        {{ form_row(form.architecture, { 'attr': {'placeholder': 'Search for the architecture by typing the name...'|trans} }) }}
+        {{ form_row(form.kernel, { 'attr': {'placeholder': 'Search for the kernel by typing the name...'|trans} }) }}
+        {{ form_row(form.cpu, { 'attr': {'placeholder': 'Search for the CPU by typing the name...'|trans} }) }}
+        {{ form_row(form.cores) }}
+        {{ form_row(form.flags) }}
+        {{ form_row(form.diskspace, { 'attr': {'placeholder': 'in Megabytes'|trans} }) }}
+        {{ form_row(form.diskspaceFree, { 'attr': {'placeholder': 'in Megabytes'|trans} }) }}
+        {{ form_row(form.memory, { 'attr': {'placeholder': 'in Megabytes'|trans} }) }}
+        {{ form_row(form.memoryFree, { 'attr': {'placeholder': 'in Megabytes'|trans} }) }}
+        {{ form_row(form.swap, { 'attr': {'placeholder': 'in Megabytes'|trans} }) }}
+        {{ form_row(form.swapFree, { 'attr': {'placeholder': 'in Megabytes'|trans} }) }}
+        {{ form_row(form.mailer) }}
+        {{ form_row(form.network) }}
+        {{ form_row(form.accounts) }}
+        {{ form_row(form.uptime) }}
+        {{ form_row(form.loadavg) }}
+        <div>
+            {{ form_rest(form) }}
+        </div>
+    </form>
+</div>

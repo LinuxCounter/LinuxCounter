@@ -1,0 +1,20 @@
+{% trans_default_domain "footer" %}
+<div class="col-sm-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ 'Links to other statistics'|trans }}</h3>
+        </div>
+        <div class="panel-body" style="text-align: center;">
+            <ul role="menu" style="text-align: left;">
+                <li><a href="{{ url('syw_front_main_stats_index') }}">{{ 'Statistics mainpage'|trans }}</a></li>
+                <li><a href="{{ url('syw_front_main_stats_users') }}">{{ 'User statistics'|trans }}</a></li>
+                <li><a href="{{ url('syw_front_main_stats_machines') }}">{{ 'Machine statistics'|trans }}</a></li>
+                <li><a href="{{ url('syw_front_main_stats_distributions') }}">{{ 'Distribution statistics'|trans }}</a></li>
+                <li><a href="{{ url('syw_front_main_stats_kernels') }}">{{ 'Kernel statistics'|trans }}</a></li>
+                <li><a href="{{ url('syw_front_main_stats_uptimes') }}">{{ 'Uptime statistics'|trans }}</a></li>
+                <li><a href="{{ url('syw_front_main_stats_counter') }}">{{ 'Linux Counter statistics'|trans }}</a></li>
+                <li><a href="{{ url('syw_front_main_stats_kernel') }}">{{ 'Linux Kernel Fun statistics'|trans }}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="tweets">
+    <ol class="tweets-list">
+        {% for tweet in tweets2 %}
+            <li class="tweet-item">
+                <div class="tweet">
+                    <div class="tweet-content">
+                        <div class="tweet-header">
+                            <a class="tweet-account-group" title="{{ 'Follow this user on Twitter'|trans }}" href="https://twitter.com/{{ tweet.user.screen_name }}">
+                                <img class="tweet-avatar" src="{{ tweet.user.profile_image_url_https }}" alt="Twitter User Avatar" title="Twitter User Avatar"/>
+                                <strong class="tweet-fullname">{{ tweet.user.name }}</strong>
+                                <span class="tweet-username">@{{ tweet.user.screen_name }}</span>
+                            </a> &middot; {{ tweet.created_at|time_ago_in_words }}
+                        </div>
+                        <p class="tweet-text">
+                            {{ tweet.text|linkify(['http', 'twitter']) }}
+                        </p>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ol>
+</div>

@@ -1,0 +1,55 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_main_main_donations" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ title }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="{{ '/bundles/sywfrontmain/images/avatar-neu.png' }}" alt="Christin Löhner says Thank you!" title="Christin Löhner says Thank you!" style="float:right;margin-left:20px;" border="0"><h2><em>{{ 'All donations are very, very welcome!'|trans }}</em></h2>
+
+                        <p> &nbsp; </p>
+                        <p>{{ 'Ths project and I, Christin Löhner, are both dependent on your donations!'|trans }}</p>
+                        <p>{{ 'With your donation, you are making sure, that this project stays alive and will be maintained and developed in the future. Every small donation is very welcome!'|trans }}</p>
+
+                        <p> &nbsp; </p>
+                        <p>{{ 'Helping and supporting the project means, helping and supporting the open source and the free software. I really appreciate your help here and I thank you very much!'|trans }}</p>
+
+                        <p> &nbsp; </p>
+                        <p>{{ 'Here are all four possibilities to donate to the project:'|trans }}</p>
+
+                        <p> &nbsp; </p>
+
+                        <div class="row">
+                            <div style="margin-bottom: 20px; text-align: center;" class="col-sm-3">
+                                <form style="display: inline;" target="_top" method="post" action="https://www.paypal.com/cgi-bin/webscr"><input type="hidden" value="_s-xclick" name="cmd"><input type="hidden" value="28KUHNKB2SQF8" name="hosted_button_id"><input border="0" type="image" alt="PayPal &ndash; The safer, easier way to pay online." name="submit" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif"><img border="0" width="1" height="1" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" alt=""></form> via paypal
+                            </div>
+                            <div style="margin-bottom: 20px; text-align: center;" class="col-sm-3">
+                                <a href="bitcoin:1Hr94UwdNn7zFAV2q46vYKqBbqtpo4xgx7?amount=0.1&label=Linux%20Counter%20Project">
+                                    <img style="width:60px;height:60px;" src="{{ '/bundles/sywfrontmain/images/bitcoin.png' }}" alt="">
+                                    <img src="{{ '/bundles/sywfrontmain/images/bitcoin2.png' }}" alt="Donate through bitcoin" title="Donate through bitcoin" border="0"><span style="margin-top:5px; font-size:8px;">1Hr94UwdNn7zFAV2q46vYKqBbqtpo4xgx7</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <p> &nbsp; </p>
+
+                        <p> &nbsp; </p>
+                        <p></p>
+
+                        <p> &nbsp; </p>
+                        <p></p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

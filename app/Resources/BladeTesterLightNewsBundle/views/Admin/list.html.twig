@@ -1,0 +1,50 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'Add or edit news items'|trans }}</h3>
+                    </div>
+                    <div class="panel-body">
+
+
+                        <a href="{{ path('news_add') }}">{{ 'bladetester_lightnews.label.news.add'|trans }}</a>
+
+                        {% if not news %}
+                            <p>{{ 'bladetester_lightnews.interfaces.list.no_news'|trans }}</p>
+                        {% else %}
+                            <p>
+                                <table class="table table-striped" id="news-list">
+                                    <thead>
+                                        <tr><th>{{ 'bladetester_lightnews.label.news.title'|trans }}</th>
+                                            <th>{{ 'bladetester_lightnews.label.news.body'|trans }}</th>
+                                            <th></th></tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for pieceOfNews in news %}
+                                                <tr class="pieceOfNews">
+                                                    <td>{{ pieceOfNews.createdAt|date('Y-m-d') }}</td>
+                                                    <td>{{ pieceOfNews.title }}</td>
+                                                    <td>
+                                                        <a href="{{ path('news_edit', {'id' : pieceOfNews.id}) }}">{{ 'bladetester_lightnews.label.news.edit'|trans }}</a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                    </tbody>
+                                </table>
+                            </p>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

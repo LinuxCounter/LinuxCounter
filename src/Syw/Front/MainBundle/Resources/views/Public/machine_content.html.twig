@@ -1,0 +1,157 @@
+{% trans_default_domain "syw_front_main_public_machine" %}
+
+<div class="syw_front_main_public_machine">
+
+    {% if (thisprivacy.getSecretMachines() == 1) %}
+        <div class="row">
+            This user has hidden his machines.
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-sm-3 leftside">
+
+                <div class="profilegravatar" id="profile_gravatar">
+                    <img src="{{ gravatar(thisuser.email) }}" alt=""/>
+                </div>
+                {% if (thisprivacy.getShowRealName() == 0) %}
+                    <div class="profile_realname">
+                        &nbsp;
+                    </div>
+                {% else %}
+                    {% if (thisuserprofile.firstName or thisuserprofile.lastName) %}
+                        <div class="profile_realname">
+                            {% if thisuserprofile.firstName %}{{ thisuserprofile.firstName }}{% endif %}{% if thisuserprofile.lastName %} {{ thisuserprofile.lastName }}{% endif %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+                <div class="profile_username">
+                    {% if (thisprivacy.getShowRealName() == 0) %}
+                    <div class="profile_realname">
+                        &nbsp;
+                    </div>
+                    {% else %}
+                        {{ thisuser.username }}
+                    {% endif %}
+                </div>
+                <div class="signature_image">
+                    <a href="{{ host }}/mcert/{{ thismachine.getId() }}.png"><img src="{{ host }}/mcert/{{ thismachine.getId() }}.png" style="width:100%;" alt="{{ 'Use this image in your email or forum signatures'|trans }}" title="{{ 'Use this image in your email or forum signatures'|trans }}"/><br/>
+                        <verysmall>{{ host }}/mcert/{{ thismachine.getId() }}.png</verysmall></a>
+                </div>
+                <div class="profile_hr">
+                    <hr size="1" noshade="noshade"/>
+                </div>
+                <div class="profile_personalinfo">
+                    {% if thisuserprofile.city %}
+                        <div class="profile_city"><span
+                                class="fa fa-location-arrow"></span> {{ thisuserprofile.city.getName() }} (<a
+                                href="http://www.openstreetmap.org/#map=15/{{ thisuserprofile.city.getLatitude() }}/{{ thisuserprofile.city.getLongitude() }}">{{ 'Show on map'|trans }}</a>)
+                        </div>{% endif %}
+                    {% if (thisprivacy.getShowEmail() == 0) %}
+                        <div class="profile_email"><span class="fa fa-envelope"></span> ~</div>
+                    {% else %}
+                        <div class="profile_email"><span class="fa fa-envelope"></span> {{ thisuser.email }}</div>
+                    {% endif %}
+                    <div class="profile_homepage"><span
+                                class="fa fa-anchor"></span> {% if thisuserprofile.homepage %}{{ thisuserprofile.homepage }}{% else %}No homepage yet{% endif %}
+                    </div>
+                    <div class="profile_language"><span class="fa fa-flag"></span> {{ language.getLanguage() }}</div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ 'General Machine Information'|trans }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="profile_personal_firstname">{{ 'Hostname'|trans }}: {% if (thisprivacy.getShowHostnames() == 1) %}{{ thismachine.hostname }}{% else %}<span class="privhidden">hidden</span>{% endif %}</div>
+                                <div id="profile_personal_lastname">{{ 'Class'|trans }}: {{ thismachine.getClass().getName()|capitalize }}</div>
+                                <div id="profile_personal_lastname">{{ 'Distribution'|trans }}: {{ thismachine.getDistribution().getName()|capitalize }}{% if (thisprivacy.getShowVersions() == 1) %} {{ thismachine.distversion }}{% endif %}</div>
+                                <div id="profile_personal_birthday">{{ 'Country'|trans }}: {{ thismachine.getCountry().getName() }}</div>
+                                <div id="profile_personal_birthplace">{{ 'Online'|trans }}:
+                                    {% if thismachine.online == 1 %}
+                                        <span class="label label-success">{{ 'Online'|trans }}</span>
+                                    {% else %}
+                                        <span class="label label-danger">{{ 'Offline'|trans }}</span>
+                                    {% endif %}
+                                </div>
+                                <div id="profile_personal_homepage">{{ 'Last update'|trans }}: {{ thismachine.modifiedAt|date("Y-m-d") }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ 'Processor Information'|trans }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="profile_location_city">{{ 'Processor'|trans }}: {{ thismachine.cpu.getName() }}</div>
+                                <div id="profile_location_lat">{{ 'Number of Cores'|trans }}: {{ thismachine.cores }}</div>
+                                <div id="profile_location_long">{{ 'CPU Flags'|trans }}: {{ thismachine.flags }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ 'Memory and Space Information'|trans }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="profile_contact_icq">
+                                    {% if thismachine.diskspace == 0 %}
+                                        <span class="progress-description">{{ 'No Diskspace'|trans }}</span>
+                                    {% else %}
+                                        <span class="progress-description">{{ ((100/thismachine.diskspace)*thismachine.diskspaceFree)|round(2, 'common') }}% {{ 'Free diskspace'|trans }} (of {{ (thismachine.diskspace)|round(2, 'common')|number_format }} Mb)</span>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-lico" role="progressbar" aria-valuenow="{{ ((100/thismachine.diskspace)*thismachine.diskspaceFree)|round(2, 'common') }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ ((100/thismachine.diskspace)*thismachine.diskspaceFree)|round(2, 'common') }}%"><span class="sr-only"></span></div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div id="profile_contact_skype">
+                                    {% if thismachine.memory == 0 %}
+                                        <span class="progress-description">{{ 'No RAM'|trans }}</span>
+                                    {% else %}
+                                        <span class="progress-description">{{ ((100/thismachine.memory)*thismachine.memoryFree)|round(2, 'common') }}% {{ 'Free RAM'|trans }} (of {{ (thismachine.memory)|number_format }} Mb)</span>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-lico" role="progressbar" aria-valuenow="{{ ((100/thismachine.memory)*thismachine.memoryFree)|round(2, 'common') }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ ((100/thismachine.memory)*thismachine.memoryFree)|round(2, 'common') }}%"><span class="sr-only"></span></div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div id="profile_contact_jabber">
+                                    {% if thismachine.swap == 0 %}
+                                    <span class="progress-description">{{ 'No Swap'|trans }}</span>
+                                    {% else %}
+                                        <span class="progress-description">{{ ((100/thismachine.swap)*thismachine.swapFree)|round(2, 'common') }}% {{ 'Free Swap'|trans }} (of {{ (thismachine.swap)|round(2, 'common')|number_format }} Mb)</span>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-lico" role="progressbar" aria-valuenow="{{ ((100/thismachine.swap)*thismachine.swapFree)|round(2, 'common') }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ ((100/thismachine.swap)*thismachine.swapFree)|round(2, 'common') }}%"><span class="sr-only"></span></div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ 'Other information'|trans }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="profile_info_interests">{{ 'Accounts'|trans }}: {{ thismachine.accounts }}</div>
+                                <div id="profile_info_hobbies">{{ 'Mailer'|trans }}: {{ thismachine.mailer }}</div>
+                                <div id="profile_info_hobbies">{{ 'Network'|trans }}: {{ thismachine.network }}</div>
+                                <div id="profile_info_hobbies">{{ 'Uptime'|trans }}: {{ uptime }}</div>
+                                <div id="profile_info_hobbies">{{ 'Load average'|trans }}: {{ thismachine.loadavg }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>

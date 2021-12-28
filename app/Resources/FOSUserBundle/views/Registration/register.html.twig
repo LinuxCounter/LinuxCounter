@@ -1,0 +1,18 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "FOSUserBundle" %}
+
+{% block fos_user_content %}
+    <!-- Page Content -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'Register a new Linux Counter Account'|trans }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock fos_user_content %}

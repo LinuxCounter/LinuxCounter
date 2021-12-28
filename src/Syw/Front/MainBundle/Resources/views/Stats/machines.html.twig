@@ -1,0 +1,109 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_main_stats_machines" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ title1 }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    {{ 'This is the list of accounts on the machines. There are %machine_accounts_gesamt% machines in the database with at least 1 account or more.'|trans({
+                                        '%machine_accounts_gesamt%': machine_accounts_gesamt|number_format
+                                    }) }}
+                                    <p>&nbsp;</p>
+                                </div>
+                            </div>
+                            {% for this in stats.accounts %}
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <span class="progress-description">{{ this.accounts }} Accounts</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <div class="progress">
+                                            <div class="ui-progressbar-value progress-bar-value" style="position:absolute; z-index:1; padding-left: 20px;">{{ this.percent|round(2, 'common') }}%</div>
+                                            <div class="progress-bar progress-bar-lico" role="progressbar" aria-valuenow="{{ this.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ this.percent }}%"><span class="sr-only"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ title2 }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    {{ 'This is the list of machines per country. There are %machine_countries_gesamt% machines in the database with a country assigned.'|trans({
+                                        '%machine_countries_gesamt%': machine_countries_gesamt|number_format
+                                    }) }}
+                                    <p>&nbsp;</p>
+                                </div>
+                            </div>
+                            {% if paginationAAA.getTotalItemCount > 0 %}
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationAAA, 'Name', 'b.name', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationAAA, 'Code', 'b.code', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationAAA, 'Population', 'b.population', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationAAA, 'No. of Machines', 'b.machinesnum', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for row in paginationAAA %}
+                                        <tr>
+                                            <td>
+                                                <a href="{{ url('syw_front_main_stats_countries', {'id': row.id}) }}">{{ row.name }}</a>
+                                            </td>
+                                            <td>
+                                                {{ row.code|upper }}
+                                            </td>
+                                            <td>
+                                                {{ row.population|number_format }}
+                                            </td>
+                                            <td>
+                                                {{ row.machinesnum|number_format }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                                {{ knp_pagination_render(paginationAAA) }}
+                            {% else %}
+                                No data.
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ include('SywFrontMainBundle:Common:_guess.html.twig') }}
+        {{ include('SywFrontMainBundle:Common:_stats_links.html.twig') }}
+    </div>
+
+{% endblock %}

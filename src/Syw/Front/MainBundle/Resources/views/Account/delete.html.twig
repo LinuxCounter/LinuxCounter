@@ -1,0 +1,53 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_main_account_delete" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'Delete your account'|trans }}</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        {% for label, flashes in app.session.flashbag.all %}
+                            {% for flash in flashes %}
+                                <div class="alert alert-{{ label }}">
+                                    {{ flash }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+
+                        <p>{{ 'We are sorry, that you want to leave us and the Linux community.'|trans }}</p>
+                        <p>&nbsp;</p>
+                        <p>{{ 'Please consider to <a href="/contact">tell us</a>, what we have done wrong or what we could do better.'|trans|raw }}</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p><b>{{ 'Are you really sure, that you want to delete your whole account with all the machines in your account?'|trans }}</b></p>
+
+
+
+                        <form action="{{ url('syw_front_main_account_delete2') }}" method="post">
+
+                            <fieldset>
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <input type="submit" id="delete_yes" name="confirm" value="YES!"/>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button class="github btn btn-default btn-lg" id="delete_no" name="cancel" value="NO!" onclick="history.back();">NO!</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

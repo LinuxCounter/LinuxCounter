@@ -1,0 +1,43 @@
+## YAML Template.
+---
+language: php
+php:
+  - "5.6"
+
+sudo: required
+
+env:
+  - DB=mysql
+
+service:
+  - memcached
+
+install:
+  - composer self-update
+  - composer install
+
+before_script:
+  - sudo apt-get install nodejs npm
+  - sudo npm cache clean
+  - sudo npm config set registry http://registry.npmjs.org/
+  - sudo npm install -g npm
+  - sudo npm install -g uglify-js
+  - sudo npm install -g uglifycss
+  - sudo npm install
+  - sudo ln -s /usr/local/bin/uglifyjs /usr/bin/uglifyjs
+  - sudo ln -s /usr/local/bin/uglifycss /usr/bin/uglifycss
+  - mkdir -p app/cache
+  - mkdir -p app/logs
+  - php app/console doctrine:database:create
+  - if [[ "$DB" == "mysql" ]]; then cd app/config/travis-sql; for i in *; do mysql -uroot licotest < ${i}; done; cd ../../..; fi
+  - php app/console doctrine:cache:clear-metadata
+  - php app/console cache:clear
+  - php app/console assets:install --symlink web --no-debug
+  - php app/console assetic:dump
+  - php app/console asm:translations:dummy
+
+script:
+  - phpunit -c app/phpunit.travis.xml
+
+after_script:
+  - php bin/coveralls

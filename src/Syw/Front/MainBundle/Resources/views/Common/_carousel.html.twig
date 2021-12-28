@@ -1,0 +1,62 @@
+{% trans_default_domain "syw_front_main_main_index" %}
+<!-- Carousel
+================================================== -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div id="csl-item1" class="carousel-image">&nbsp;</div>
+            <div class="container">
+                <div class="carousel-caption">
+                    <h2>{{ 'Get counted as a linux user!'|trans }}</h2>
+                    <h3>{{ 'You own a linux box or an android smartphone? You are the administrator of a big server farm? You have some raspberry pi\'s at home or an old laptop with linux on it? Get counted as a linux user and register your linux machines now!'|trans }}</h3>
+                    <p><a class="btn btn-lg btn-primary" href="{{ url('fos_user_registration_register') }}" title="{{ 'Register for an account here'|trans }}" role="button">{{ 'Register today'|trans }}</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div id="csl-item2" class="carousel-image">&nbsp;</div>
+            <div class="container">
+                <div class="carousel-caption">
+                    <h2>{{ 'The Linux Counter Project'|trans }}</h2>
+                    <h3>{{ 'The counter exists since 1993 (originally on counter.li.org) and it is the most official and popular counter of linux users and linux machines in the www. Learn here what our intention is, how it works and how it measures the statistics.'|trans }}</h3>
+                    <p><a class="btn btn-lg btn-primary" href="{{ url('syw_front_main_main_about') }}" title="{{ 'Learn about what we are doing here and how we are doing this.'|trans }}" role="button">{{ 'Learn more'|trans }}</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div id="csl-item3" class="carousel-image">&nbsp;</div>
+            <div class="container">
+                <div class="carousel-caption">
+                    <h2>{{ 'One statistics to cover them all'|trans }}</h2>
+                    <h3>{{ 'No matter if you are interested in statistics about Ubuntu, Slackware, Arch Linux, Gentoo or any other distribution or if you want to know how many linux users there are in your city or country, we have the numbers!'|trans }}</h3>
+                    <p><a class="btn btn-lg btn-primary" href="{{ url('syw_front_main_stats_index') }}" title="{{ 'Visit the statistics pages around Linux, Distributions, Kernels and much more.'|trans }}" role="button">{{ 'Browse statistics'|trans }}</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div id="csl-item4" class="carousel-image">&nbsp;</div>
+            <div class="container">
+                <div class="carousel-caption">
+                    <h2>{{ 'GNU Project and Free Software Foundation'|trans }}</h2>
+                    <h3>{{ 'While always talking about Linux, the Kernel, we are also of course supporting the GNU Project and the Free Software Foundation.'|trans }}</h3>
+                    <p><a class="btn btn-lg btn-primary" href="https://www.gnu.org/gnu/gnu.en.html" title="{{ 'Visit the GNU project and learn about GNU and FSF'|trans }}" role="button">{{ 'Learn more about GNU and FSF'|trans }}</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" title="{{ 'Slide left'|trans }}" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">{{ 'Previous'|trans }}</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" title="{{ 'Slide right'|trans }}" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">{{ 'Next'|trans }}</span>
+    </a>
+</div><!-- /.carousel -->

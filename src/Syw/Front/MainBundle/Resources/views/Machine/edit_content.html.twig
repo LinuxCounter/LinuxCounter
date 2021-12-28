@@ -1,0 +1,45 @@
+{% trans_default_domain "syw_front_main_machine_edit" %}
+
+<div class="col-sm-12">
+    <form action="{{ url('syw_front_main_machine_edit', {'machinenumber': machine.getId()}) }}" {{ form_enctype(form) }}
+          method="POST" class="fos_user_profile_edit">
+        <div class="form-group"><label for="foobar" class="control-label col-sm-3 required">
+                {{ 'Machine Number'|trans }}
+            </label>
+            <div class="col-sm-9"><input type="text" id="foobar" name="foobar" readonly="readonly" required="required" class="form-control" value="{{ machine.getId() }}" data-cip-id="foobar"></div>
+        </div>
+        {{ form_row(form.updateKey) }}
+        {{ form_row(form.hostname) }}
+        {{ form_row(form.country, { 'attr': {'placeholder': 'Search for the country by typing the name...'|trans} }) }}
+        {{ form_row(form.online) }}
+        {{ form_row(form.class, { 'attr': {'placeholder': 'Search for the class by typing the name...'|trans} }) }}
+        {{ form_row(form.distribution, { 'attr': {'placeholder': 'Search for the distribution by typing the name...'|trans} }) }}
+        {{ form_row(form.distversion) }}
+        {{ form_row(form.architecture, { 'attr': {'placeholder': 'Search for the architecture by typing the name...'|trans} }) }}
+        {{ form_row(form.kernel, { 'attr': {'placeholder': 'Search for the kernel by typing the name...'|trans} }) }}
+        {{ form_row(form.cpu, { 'attr': {'placeholder': 'Search for the CPU by typing the name...'|trans} }) }}
+        {{ form_row(form.cores) }}
+        {{ form_row(form.flags) }}
+        {{ form_row(form.diskspace) }}
+        {{ form_row(form.diskspaceFree) }}
+        {{ form_row(form.memory) }}
+        {{ form_row(form.memoryFree) }}
+        {{ form_row(form.swap) }}
+        {{ form_row(form.swapFree) }}
+        {{ form_row(form.mailer) }}
+        {{ form_row(form.network) }}
+        {{ form_row(form.accounts) }}
+        {{ form_row(form.uptime) }}
+        {{ form_row(form.loadavg) }}
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-2">
+                    {{ form_rest(form) }}
+                </div>
+                <div class="col-sm-10">
+                    <a href="{{ url("syw_front_main_machine_confirm", {'machinenumber': machine.getId()}) }}" class="btn btn-default">{{ 'Delete machine...'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

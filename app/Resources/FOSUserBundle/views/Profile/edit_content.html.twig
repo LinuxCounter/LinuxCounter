@@ -1,0 +1,21 @@
+{% trans_default_domain "FOSUserBundle" %}
+
+<div class="col-sm-12">
+    <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+        {{ form_widget(form) }}
+        {{ form_rest(form) }}
+        <div>
+            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+        </div>
+    </form>
+
+    <br/>
+    <br/>
+    <script type="text/javascript" src="https://s3.amazonaws.com/phplist/phplist-subscribe-0.2.min.js"></script>
+    <div id="phplistsubscriberesult"></div>
+    <form action="https://linuxcounter.hosted.phplist.com/lists/?p=subscribe&id=1" method="post" id="phplistsubscribeform">
+        <input class="form-control" type="text" name="email" value="{{ email }}" id="emailaddress" />
+        <input type="submit" id="phplistsubscribe" value="Edit your subscription to our newsletter"/>
+    </form>
+
+</div>

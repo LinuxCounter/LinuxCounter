@@ -1,0 +1,112 @@
+{% trans_default_domain "footer" %}
+<!-- Modal -->
+{% if enable_transtool == "true" %}
+<div id="transModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">{{ 'Translate the actual page into your native language'|trans }}</h3>
+                <h4>{{ "Actually you've set your language to"|trans }} <strong>{{ transtolanguage }}</strong>. {{ 'If this is not the language you want the website translate to, then please change your language with the language selection at the bottom of the page.'|trans }}</h4>
+            </div>
+            <div id="translateform" class="modal-body">
+                <script>
+                    $(function() {
+                        $( "#tabs" ).tabs();
+                    });
+                </script>
+
+                <div id="tabs">
+                    <ul class="nav nav-tabs">
+                        <li><a href="#tabs-1">Page content</a></li>
+                        <li><a href="#tabs-2">Navigation</a></li>
+                        <li><a href="#tabs-3">Footer</a></li>
+                        <li><a href="#tabs-4">Others</a></li>
+                    </ul>
+                    <div id="tabs-1">
+                        <form action="{{ url('syw_front_main_translate_thispage') }}" method="post" id="arrt">
+                            {% for translation in formTrans_route.translations %}
+                                <div class="form-group">
+                                    {{ form_row(translation.transKey, {'data': translation.transKey.vars.value}) }}
+                                    {{ form_row(translation.transLocale) }}
+                                    {{ form_row(translation.messageDomain) }}
+                                    {{ form_row(translation.translation) }}
+                                    <hr size="1" noshade="noshade"/>
+                                </div>
+                            {% endfor %}
+                            {{ form_rest(formTrans_route) }}
+                            <div class="form-group">
+                                <input type="submit" value="{{ 'Save translation!'|trans }}" onclick="showLoading()"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="tabs-2">
+                        <form action="{{ url('syw_front_main_translate_thispage') }}" method="post" id="arrt">
+                            {% for translation in formTrans_navi.translations %}
+                                <div class="form-group">
+                                    {{ form_row(translation.transKey, {'data': translation.transKey.vars.value}) }}
+                                    {{ form_row(translation.transLocale) }}
+                                    {{ form_row(translation.messageDomain) }}
+                                    {{ form_row(translation.translation) }}
+                                    <hr size="1" noshade="noshade"/>
+                                </div>
+                            {% endfor %}
+                            {{ form_rest(formTrans_navi) }}
+                            <div class="form-group">
+                                <input type="submit" value="{{ 'Save translation!'|trans }}" onclick="showLoading()"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="tabs-3">
+                        <form action="{{ url('syw_front_main_translate_thispage') }}" method="post" id="arrt">
+                            {% for translation in formTrans_footer.translations %}
+                                <div class="form-group">
+                                    {{ form_row(translation.transKey, {'data': translation.transKey.vars.value}) }}
+                                    {{ form_row(translation.transLocale) }}
+                                    {{ form_row(translation.messageDomain) }}
+                                    {{ form_row(translation.translation) }}
+                                    <hr size="1" noshade="noshade"/>
+                                </div>
+                            {% endfor %}
+                            {{ form_rest(formTrans_footer) }}
+                            <div class="form-group">
+                                <input type="submit" value="{{ 'Save translation!'|trans }}" onclick="showLoading()"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="tabs-4">
+                        <form action="{{ url('syw_front_main_translate_thispage') }}" method="post" id="arrt">
+                            {% for translation in formTrans_others.translations %}
+                                <div class="form-group">
+                                    {{ form_row(translation.transKey, {'data': translation.transKey.vars.value}) }}
+                                    {{ form_row(translation.transLocale) }}
+                                    {{ form_row(translation.messageDomain) }}
+                                    {{ form_row(translation.translation) }}
+                                    <hr size="1" noshade="noshade"/>
+                                </div>
+                            {% endfor %}
+                            {{ form_rest(formTrans_others) }}
+                            <div class="form-group">
+                                <input type="submit" value="{{ 'Save translation!'|trans }}" onclick="showLoading()"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    function showLoading() {
+                        $('#loadingDiv').show();
+                    }
+                    $(".transKey").blur();
+                    $('.transKey').css( "background-color", "lightgrey" );
+                    $('.transKey').css( "cursor", "not-allowed" );
+                    $('.transKey').attr('enable',false)
+                    $( ".transKey" ).focus(function() {
+                        $(".transKey").blur();
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

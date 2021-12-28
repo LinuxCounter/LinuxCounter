@@ -1,0 +1,128 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_main_main_faq" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'Frequently asked questions'|trans }}</h3>
+                    </div>
+                    <div id="faq" class="panel-body faq">
+                        <div class="faqcontent">
+
+
+
+                            <div id="question1" class="faqquestionbox">
+                                <div class="faqquestion">
+                                    <strong> &middot; </strong>
+                                    {{ 'What is this?'|trans }}
+                                </div>
+
+                                <div id="answer1" class="faqanswerbox">
+                                    <div class="faqanswer">
+                                        <p>{{ 'The New LinuxCounter Project was created in order to revive and replace the good old linux counter project on counter.li.org.'|trans }}<br/>
+                                            {{ 'Since January 11, 2012 counter.li.org redirects directly to linuxcounter.net and thus, linuxcounter.net is the only and main real linux counter with the greatest userbase.'|trans }}</p>
+                                        <p>{{ 'The original Linux Counter was run by a nonprofit membership organization called the Linux Counter Project.'|trans }} {{ 'This organization was created on May 1, 1999, taking over the running of the counter from Harald Tveit Alvestrand, who has been running the project since 1993. Harald Alvestrand is chief executive officer of the organization.'|trans }}</p>
+                                        <p>{{ 'It was started as a "for fun" project to find out how many Linux users there are worldwide. The basic idea is for people to register themselves as being a Linux user.'|trans }} {{ "Of course, this way you won't get all Linux users counted as not every Linux user will register himself at the Linux Counter site."|trans }} {{ 'Thus, the only way to "know" the number of Linux users worldwide, is to make a guess, preferably a not-too-wild guess of the number of Linux users. Not making wild guesses there is only one way to go: statistics. And so, there we are.'|trans }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div id="question2" class="faqquestionbox">
+                                <div class="faqquestion">
+                                    <strong> &middot; </strong>
+                                    {{ 'What is this all about?'|trans }}
+                                </div>
+
+                                <div id="answer2" class="faqanswerbox">
+                                    <div class="faqanswer">
+                                        <p>{{ 'This is all about statistics. Statistics about Linux and its users. The main goal is to determine how many linux users there are worldwide.'|trans }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div id="question3" class="faqquestionbox">
+                                <div class="faqquestion">
+                                    <strong> &middot; </strong>
+                                    {{ 'Is this really free of charge?'|trans }}
+                                </div>
+
+                                <div id="answer3" class="faqanswerbox">
+                                    <div class="faqanswer">
+                                        {{ 'Yes, sure! Linux is free and so we are free too. This service is completly free of charge without any hidden costs or something.'|trans }}
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div id="question4" class="faqquestionbox">
+                                <div class="faqquestion">
+                                    <strong> &middot; </strong>
+                                    {{ 'Is this service secure?'|trans }}
+                                </div>
+
+                                <div id="answer4" class="faqanswerbox">
+                                    <div class="faqanswer">
+                                        {{ 'Of course it is. It is as secure as it can be with a great bunch of established and popular third party bundles, that are open source too.'|trans }}<br/><br/>
+                                        {{ 'All of your private data is secured and safely encrypted in our database. You have the choice only by yourself to make your data (for example your email address) public or not.'|trans }}<br/>
+                                        {{ 'And even if your email address is public, it is secured by javascript and other methods to prevent bots from stealing it.'|trans }}
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div id="question5" class="faqquestionbox">
+                                <div class="faqquestion">
+                                    <strong> &middot; </strong>
+                                    {{ 'How can I contribute?'|trans }}
+                                </div>
+
+                                <div id="answer5" class="faqanswerbox">
+                                    <div class="faqanswer">
+                                        {{ 'That is quite simple and there are different possibilities:'|trans }}
+                                        <ul>
+                                            <li>{{ 'Go to the <a href="https://github.com/christinloehner/linuxcounter.new">Github page</a>, fork our repository and give us pull requests, if you have fixed something or added a cool feature.'|trans }}</li>
+                                            <li><a href="{{ url('syw_front_main_main_contact') }}">{{ 'Contact us'|trans }}</a> {{ 'and request direct access to the repository, if you want to be a permanent team member and if you are sure, you have the time and the willing to do more codings.'|trans }}</li>
+                                            <li>{{ 'Tell others about us! Go to Facebook, Google+, Twitter, Identi.ca, or wherever you are member and tell the peoples about this cool thing!'|trans }}</li>
+                                            <li>{{ 'Provide us some translations for your native language. For this there will be a translation tool available later.'|trans }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div id="question6" class="faqquestionbox">
+                                <div class="faqquestion">
+                                    <strong> &middot; </strong>
+                                    {{ 'Can I donate some money for supporting this cool project?'|trans }}
+                                </div>
+
+                                <div id="answer6" class="faqanswerbox">
+                                    <div class="faqanswer">
+                                        {{ 'Sure! Please look at this page <a href="%url%">here</a>.'|trans({
+                                            '%url%': url('syw_front_main_main_donations')
+                                        })|raw }}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'Edit a news item'|trans }}</h3>
+                    </div>
+                    <div class="panel-body">
+
+
+                        <form id="news-edit" method="POST"
+                              action="{{ url('news_edit', {'id' : news.id}) }}" {{ form_enctype(form) }}>
+                            {{ form_widget(form) }}
+                            <input type="submit" value="{{ 'bladetester_lightnews.label.news.edit'|trans }}"/>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "SywFrontMainBundle::base.html.twig" %}
+{% trans_default_domain "syw_front_main_stats_cities" %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-12">
+
+                    {% if is_granted('ROLE_MANAGER') %}
+                        <div id="manager-panel" class="panel panel-danger">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ 'Manager Panel'|trans }}</h3>
+                            </div>
+                            <div class="panel-body" style="text-align: center;">
+
+                                <a href="{{ url('syw_front_manager_correct_correctcity', {'cityid': city.id}) }}"><button type="button" class="btn btn-default">Correct This City (if needed)</button></a>
+                                <a href="{{ url('syw_front_manager_merge_mergeduplicatecities', {'cityid': city.id}) }}"><button type="button" class="btn btn-default">Merge Duplicates (if any)</button></a>
+
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ title }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge">{{ city.getUsers()|length|number_format }} {{ 'Users'|trans }}</span>
+                                    {{ 'City: %city.name%'|trans({
+                                            '%city.name%': city.getName()
+                                    }) }}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">{{ country.getUsers()|length|number_format }} {{ 'Users'|trans }}</span>
+                                    {{ 'Country: %country.name% (%country.code%)'|trans({
+                                        '%country.name%': country.getName(),
+                                        '%country.code%': country.getCode()|upper,
+                                    }) }}
+                                </li>
+                            </ul>
+                            <p>
+                                {{ 'The city %city.name% in %country.name% has a population of %city.population% peoples while only %city.users% Linux users are registered in our database.'|trans({
+                                    '%city.name%': city.getName(),
+                                    '%country.name%': country.getName(),
+                                    '%city.population%': city.getPopulation()|number_format,
+                                    '%city.users%': city.getUserNum()|number_format,
+                                }) }}
+                            </p>
+                            <p>&nbsp;</p>
+                            <p><strong>A list of the users in this city follows:</strong></p>
+                            <p>&nbsp;</p>
+                            <p>
+                                {% if paginationAAA.getTotalItemCount > 0 %}
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            {{ knp_pagination_sortable(paginationAAA, 'Counter No.', 'a.user', {'defaultDirection' : 'asc'}) }}
+                                        </th>
+                                        <th>
+                                            Public page
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for row in paginationAAA %}
+                                        <tr>
+                                            <td>
+                                                {{ row.id }}
+                                            </td>
+                                            <td>
+                                                <a href="{{ url('syw_front_main_public_profile', {'counternumber': row.id}) }}">link</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                                {{ knp_pagination_render(paginationAAA) }}
+                            {% else %}
+                                No data.
+                            {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ include('SywFrontMainBundle:Common:_guess.html.twig') }}
+        {{ include('SywFrontMainBundle:Common:_stats_links.html.twig') }}
+    </div>
+
+{% endblock %}

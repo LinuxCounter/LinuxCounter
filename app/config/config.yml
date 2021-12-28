@@ -1,0 +1,286 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: "@ManagerBundle/Resources/config/services.yml" }
+    - { resource: "@ToolBoxBundle/Resources/config/services.yml" }
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                charset:  UTF8
+                options:
+                    1001: true
+            lico:
+                driver:   "%database_lico_driver%"
+                host:     "%database_lico_host%"
+                port:     "%database_lico_port%"
+                dbname:   "%database_lico_name%"
+                user:     "%database_lico_user%"
+                password: "%database_lico_password%"
+                charset:  UTF8
+                options:
+                    1001: true
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection:     default
+                auto_mapping: true
+            lico:
+                connection:     lico
+
+framework:
+    #esi:             ~
+    translator:      { fallback: "%locale%" }
+    default_locale:  "%locale%"
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        handler_id:  ~
+        name: "LICOSESSID"
+    fragments:       ~
+    http_method_override: true
+
+vitre_php_console:
+    enabled: true
+    driver: php_console
+    source_base_path: %kernel.root_dir%
+    encoding: utf-8
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: false
+    form:
+        resources:
+            - 'SywFrontMainBundle:Form:fields.html.twig'
+            - 'ShtumiUsefulBundle::fields.html.twig'
+    globals:
+        enable_transtool: %enable_transtool%
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:        [ 'FOSUserBundle', 'SywFrontMainBundle', 'SywFrontApiBundle' ]
+    node: /usr/bin/nodejs
+    filters:
+        cssrewrite: ~
+        uglifyjs2:
+            bin: /usr/local/bin/uglifyjs
+        uglifycss:
+            bin: /usr/local/bin/uglifycss
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport:  "%mailer_transport%"
+    host:       "%mailer_host%"
+    username:   "%mailer_user%"
+    password:   "%mailer_password%"
+    # encryption: "tls"
+    # auth_mode:  "plain"
+    spool:      { type: memory }
+
+knp_paginator:
+    template:
+         pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Syw\Front\MainBundle\Entity\User
+    from_email:
+        address:        noreply@linuxcounter.net
+        sender_name:    The Linux Counter Project
+    registration:
+        form:
+            type: syw_user_registration
+        confirmation:
+            enabled:    true
+            template:   FOSUserBundle:Registration:email.txt.twig
+
+fos_rest:
+    param_fetcher_listener: true
+    allowed_methods_listener: true
+    body_listener: true
+    format_listener:
+        rules:
+            - { path: '^/v1/', priorities: ['json'], fallback_format: json, prefer_extension: false }
+            - { path: '^/', priorities: ['html'], fallback_format: html, prefer_extension: false }
+    routing_loader:
+        default_format: json
+        include_format: false
+    view:
+        view_response_listener: 'force'
+        serialize_null: true
+        formats:
+            json: true
+            xml: false
+            html: false
+
+asm_translation_loader:
+    history: true
+
+easy_admin:
+    entities:
+        User:
+            class: Syw\Front\MainBundle\Entity\User
+        Translation:
+            class: Asm\TranslationLoaderBundle\Entity\Translation
+            form:
+                fields: ['transKey', 'translation', 'transLocale', 'messageDomain', 'dateCreated', 'dateUpdated']
+        Languages:
+            class: Syw\Front\MainBundle\Entity\Languages
+        Machines:
+            class: Syw\Front\MainBundle\Entity\Machines
+        Architectures:
+            class: Syw\Front\MainBundle\Entity\Architectures
+        Cities:
+            class: Syw\Front\MainBundle\Entity\Cities
+        Classes:
+            class: Syw\Front\MainBundle\Entity\Classes
+        Countries:
+            class: Syw\Front\MainBundle\Entity\Countries
+        Cpus:
+            class: Syw\Front\MainBundle\Entity\Cpus
+        Distributions:
+            class: Syw\Front\MainBundle\Entity\Distributions
+        Kernels:
+            class: Syw\Front\MainBundle\Entity\Kernels
+        Purposes:
+            class: Syw\Front\MainBundle\Entity\Purposes
+
+ornicar_gravatar:
+    rating: pg
+    size: 240
+    default: mm
+
+mopa_bootstrap:
+    form: ~  # Adds twig form theme  support
+    menu: ~  # enables twig helpers for menu
+
+shtumi_useful:
+    autocomplete_entities:
+        cities:
+            class: SywFrontMainBundle:Cities
+            property: name
+            case_insensitive: true
+        distributions:
+            class: SywFrontMainBundle:Distributions
+            property: name
+            case_insensitive: true
+        kernels:
+            class: SywFrontMainBundle:Kernels
+            property: name
+            case_insensitive: true
+        cpus:
+            class: SywFrontMainBundle:Cpus
+            property: name
+            case_insensitive: true
+        architectures:
+            class: SywFrontMainBundle:Architectures
+            property: name
+            case_insensitive: true
+        classes:
+            class: SywFrontMainBundle:Classes
+            property: name
+            case_insensitive: true
+        purposes:
+            class: SywFrontMainBundle:Purposes
+            property: name
+            case_insensitive: true
+        countries:
+            class: SywFrontMainBundle:Countries
+            property: name
+            case_insensitive: true
+
+whisnet_irc_bot:
+    connection_class: Whisnet\IrcBotBundle\Connection\Socket
+    host: irc.freenode.net
+    port: 6667
+    command_prefix: !bot
+    user:
+        username: linuxcounter
+        mode: 8
+    channels: ["#linuxcounter"]
+
+blade_tester_light_news:
+    driver: doctrine/orm
+    engine: twig
+    classes:
+        news:
+            entity: 'Syw\Front\NewsBundle\Entity\News'
+
+redmonster_announcement:
+    duration: +2 months
+    db_driver: orm
+    announcement_class: Redmonster\AnnouncementBundle\Entity\Announcement
+
+eko_feed:
+    # hydrator: your_hydrator.custom.service # Optional, if you use entity hydrating with a custom hydrator
+    translation_domain: syw_front_rssfeed_default_feed # Optional, if you want to use a custom translation domain
+    feeds:
+        article:
+            title:       'Linux Counter Project News and Announcements'
+            description: 'Read our news and announcements through this RSS feed or visit us online on https://www.linuxcounter.net.'
+            link:
+                route_name: syw_front_rssfeed_default_feed
+                # route_params: {id: 2} # necessary if route cantains required parameters
+            encoding:    'utf-8'
+            author:      'Christin Löhner' # Only required for Atom feeds
+
+ewz_recaptcha:
+    public_key:  "%recaptcha_public_key%"
+    private_key: "%recaptcha_private_key%"
+    locale_key:  "%kernel.default_locale%"
+
+aequasi_cache:
+    instances:
+        default:
+          persistent: true # Boolean or persistent_id
+          namespace: mc
+          type: memcached
+          hosts:
+              - { host: localhost, port: 11211 }
+    doctrine:
+        enabled: true
+        metadata:
+            instance: default
+            entity_managers:   [ default ]          # the name of your entity_manager connection
+            document_managers: [ default ]       # the name of your document_manager connection
+        result:
+            instance: default
+            entity_managers:   [ default, read ]  # you may specify multiple entity_managers
+        query:
+            instance: default
+            entity_managers: [ default ]
+    session:
+        enabled: true
+        instance: default
+        prefix: "session_"
+        ttl: 86400
+
+
+

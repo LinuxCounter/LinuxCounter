@@ -1,0 +1,35 @@
+# This file is a "template" of what your parameters.yml file should look like
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: jenkinsbuild
+    database_user: jenkins
+    database_password: jenkins
+    database_lico_driver: pdo_mysql
+    database_lico_host: 127.0.0.1
+    database_lico_port: null
+    database_lico_name: jenkinsbuild
+    database_lico_user: jenkins
+    database_lico_password: jenkins
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+    admin_email: admin@linuxcounter.net
+    locale:            en
+    secret:            ThisTokenIsSoWonderfulAndSecretYouWontBelieveThat
+    base_host: www.linuxcounter.net
+    base_proto: https
+    api_host:  api.linuxcounter.net
+    api_proto: https
+    enable_transtool: false
+
+    # Twitter
+    twitter_consumer_key: consumerkey
+    twitter_consumer_secret: consumersectret
+    twitter_oauth_token: oauthtoken
+    twitter_oauth_token_secret: aouthtokensecret
+
+    recaptcha_private_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    recaptcha_public_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

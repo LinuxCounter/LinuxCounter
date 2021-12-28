@@ -1,0 +1,88 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+
+
+services:
+    session.handler:
+        alias: memcache.session_handler
+    app.locale_listener:
+        class: Syw\Front\MainBundle\EventListener\LocaleListener
+        arguments: ["%kernel.default_locale%"]
+        tags:
+            - { name: kernel.event_subscriber }
+    app.user_locale_listener:
+        class: Syw\Front\MainBundle\EventListener\UserLocaleListener
+        arguments: [@session]
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login, method: onInteractiveLogin }
+    syw.password_resetting:
+        class: Syw\Front\MainBundle\EventListener\PasswordResettingListener
+        arguments: [@router]
+        tags:
+            - { name: kernel.event_subscriber }
+    syw.form_success:
+        class: Syw\Front\MainBundle\EventListener\FormSuccessListener
+        arguments: [@router]
+        tags:
+            - { name: kernel.event_subscriber }
+    syw_user.registration.form.type:
+        class: Syw\Front\MainBundle\Form\Type\RegistrationFormType
+        tags:
+            - { name: form.type, alias: syw_user_registration }
+    syw.util.user_manipulator:
+        class:      Syw\Front\MainBundle\Util\UserManipulator
+        arguments:  [@fos_user.user_manager]
+    syw.userprofile_manager:
+        class:      Syw\Front\MainBundle\Manager\UserProfileManager
+    syw.repository_helper:
+        class: Syw\Front\MainBundle\Util\RepositoryHelper
+        arguments: [ @doctrine.orm.entity_manager ]
+    propaganistas.emailObfuscator:
+        class: Propaganistas\Twig\Extension\EmailObfuscator
+        public: false
+        tags:
+            - { name: twig.extension }
+    syw.irclistener.importlistener:
+        class: Syw\Front\MainBundle\EventListener\IrcBotImportListener
+        arguments: ['@service_container', '@doctrine']
+    syw.loginlistener.login:
+        class: Syw\Front\MainBundle\EventListener\LoginListener
+        arguments: ['@service_container', '@router', '@security.context', '@doctrine']
+        tags:
+            - { name: 'kernel.event_subscriber' }
+            - { name: 'kernel.event_listener', event: 'security.interactive_login' }
+    activity_listener:
+        class: Syw\Front\MainBundle\Listener\ActivityListener
+        arguments: ['@service_container', '@security.context', '@doctrine']
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }
+    twig.extension.date:
+        class: Jasny\Twig\DateExtension
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.pcre:
+        class: Jasny\Twig\PcreExtension
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.text:
+        class: Jasny\Twig\TextExtension
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.array:
+        class: Jasny\Twig\ArrayExtension
+        tags:
+            - { name: twig.extension }
+    salavert.twig.time_ago:
+        class: Salavert\Twig\Extension\TimeAgoExtension
+        arguments: [@translator]
+        tags:
+        - { name: twig.extension }
+    syw.twig_extension:
+        class: Syw\Front\MainBundle\Twig\MainTwigExtension
+        public: false
+        tags:
+            - { name: twig.extension }
